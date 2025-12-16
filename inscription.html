@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Forfeo</title>
+    
+    <style>
+        /* --- STYLE GÉNÉRAL (Dark Mode) --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: rgba(10, 25, 47, 0.95);
+            border-bottom: 1px solid #1f2f4d;
+        }
+
+        .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+        
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+        nav a:hover { color: #64ffda; }
+
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        /* --- STYLE DU FORMULAIRE --- */
+        .login-box {
+            background-color: #112240;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border: 1px solid #1f2f4d;
+        }
+
+        h1 { color: #e6f1ff; margin-bottom: 10px; text-align: center; }
+        .desc { color: #8892b0; margin-bottom: 30px; text-align: center; }
+
+        .input-group { margin-bottom: 20px; }
+
+        label {
+            display: block;
+            color: #64ffda; /* Vert menthe */
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #233554;
+            background-color: #0a192f; /* Fond très sombre */
+            color: #ccd6f6; /* Texte clair */
+            font-family: inherit;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #64ffda;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: #64ffda;
+            color: #0a192f;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #4cdbb3;
+            transform: translateY(-2px);
+        }
+
+        .btn-retour {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #64ffda;
+            text-decoration: none;
+        }
+        .btn-retour:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
+        <nav>
+            <a href="index.html">Retour à l'accueil</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="login-box">
+            <h1>Inscription aux Concours</h1>
+            <p class="desc">
+                Remplissez ce formulaire pour valider votre participation.
+            </p>
+
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+                <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
+                
+                <input type="hidden" name="subject" value="Nouvelle Inscription Concours Forfeo">
+                <input type="hidden" name="from_name" value="Site Forfeo Inscription">
+                
+                <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci.html">
+
+                <div class="input-group">
+                    <label for="name">Votre Nom Complet</label>
+                    <input type="text" name="name" id="name" required placeholder="Ex: Jean Tremblay">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Votre Email</label>
+                    <input type="email" name="email" id="email" required placeholder="Ex: contact@email.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="concours">À quel concours participez-vous ?</label>
+                    <select name="concours" id="concours">
+                        <option value="Grand Tirage">Le Grand Tirage (Inscription simple)</option>
+                        <option value="Escapade">Escapade de Rêve (Via achat de forfait)</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Valider mon inscription</button>
+
+            </form>
+        </div>
+        
+        <a href="index.html" class="btn-retour">← Retourner au site</a>
+    </main>
+
+</body>
+</html>
