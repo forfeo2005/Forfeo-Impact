@@ -106,10 +106,10 @@
         .btn-principal { background-color: #64ffda; color: #0a192f; }
         .btn-secondaire { border: 2px solid #64ffda; color: #64ffda; }
 
-        /* --- 4. SECTION COMMENT ÇA MARCHE (Nouvelle) --- */
+        /* --- 4. SECTION COMMENT ÇA MARCHE --- */
         .steps-section {
             padding: 80px 20px;
-            background-color: #0d1f3a; /* Un tout petit peu plus clair pour séparer */
+            background-color: #0d1f3a;
             border-top: 1px solid #1f2f4d;
             border-bottom: 1px solid #1f2f4d;
         }
@@ -174,10 +174,12 @@
         .carte h3 { color: #e6f1ff; margin-top: 10px; font-size: 1.5em; }
         .carte p { color: #8892b0; font-size: 1em; margin-bottom: 20px;}
 
-        .prix {
-            font-size: 1.3em !important;
+        /* Style pour le texte "Prix à venir" (italique et couleur différente) */
+        .prix-a-venir {
+            font-size: 1em !important;
             color: #64ffda !important;
-            font-weight: bold;
+            font-style: italic;
+            font-weight: normal;
             margin: 25px 0;
         }
 
@@ -259,7 +261,7 @@
                     <div style="font-size: 3em; margin-bottom: 10px;">🎯</div>
                     <h3 style="color: #e6f1ff;">1. Choisissez</h3>
                     <p style="color: #a8b2d1;">
-                        Optez pour l'<strong>Offre groupée</strong> de jeux indés, tentez le <strong>Grand Tirage</strong> ou visez l'<strong>Escapade de Rêve</strong>.
+                        Choisissez votre forfait.
                     </p>
                 </div>
 
@@ -267,7 +269,7 @@
                     <div style="font-size: 3em; margin-bottom: 10px;">❤️</div>
                     <h3 style="color: #e6f1ff;">2. Soutenez</h3>
                     <p style="color: #a8b2d1;">
-                        Chaque option a son impact : <strong>100% des profits</strong> pour les jeux ou <strong>1 $ par forfait</strong> versé à une cause locale.
+                        1 $ est reversé à une cause que Forfeo soutient.
                     </p>
                 </div>
 
@@ -275,7 +277,7 @@
                     <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
                     <h3 style="color: #e6f1ff;">3. Gagnez</h3>
                     <p style="color: #a8b2d1;">
-                        Vous êtes automatiquement inscrit pour gagner : <strong>500 $</strong>, une <strong>carte cadeau de 100 $</strong> ou un <strong>Voyage</strong> !
+                        Vous êtes automatiquement inscrit à un de nos concours du moment que vous sélectionnerez.
                     </p>
                 </div>
 
@@ -290,7 +292,7 @@
                     <span class="badge">Nouveau</span>
                     <h3>Offre groupée</h3>
                     <p>Profitez d'un lot exclusif de jeux indés à petit prix. 100% des profits sont reversés à une cause locale.</p>
-                    <p class="prix">500 $ à gagner</p>
+                    <p class="prix-a-venir">Détails du concours et prix à venir...</p>
                     <a href="#inscription" class="btn-carte">Participer</a>
                 </div>
 
@@ -298,7 +300,7 @@
                     <span class="badge">Populaire</span>
                     <h3>Le Grand Tirage</h3>
                     <p>Tentez votre chance ! Chaque don vous qualifie automatiquement pour remporter la cagnotte du mois.</p>
-                    <p class="prix">Carte cadeau 100 $</p>
+                    <p class="prix-a-venir">Détails du concours et prix à venir...</p>
                     <a href="#inscription" class="btn-carte">S'inscrire</a>
                 </div>
 
@@ -306,7 +308,7 @@
                     <span class="badge">Vedette</span>
                     <h3>Escapade de Rêve</h3>
                     <p>Pour chaque forfait acheté, 1 $ est versé à une cause sociale. Courez la chance de gagner une escapade !</p>
-                    <p class="prix">Voyage à gagner</p>
+                    <p class="prix-a-venir">Détails du concours et prix à venir...</p>
                     <a href="#inscription" class="btn-carte">Voir les infos</a>
                 </div>
             </div>
@@ -329,3 +331,4 @@
 
 </body>
 </html>
+
