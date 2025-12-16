@@ -1,166 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Forfeo - Communauté & Concours</title>
-    
-    <meta property="og:title" content="Forfeo - Communauté & Concours">
-    <meta property="og:description" content="Bienvenue sur le site officiel de la communauté Forfeo.">
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forfeo - Ensemble pour un impact local</title>
     <style>
+        /* --- CONFIGURATION DE BASE --- */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            /* La couleur de fond foncée de l'image */
+            background-color: #0a192f; 
+            color: white;
             line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9; /* Fond gris très clair pour faire ressortir le blanc */
         }
+
+        /* --- BARRE DE NAVIGATION (En haut à droite) --- */
         header {
-            background-color: #6a1b9a;
-            color: white;
-            padding: 10px 20px;
-            display: flex; 
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Petite ombre sous le menu */
-        }
-        .logo-img {
-            height: 80px;
-            width: auto;
-            border-radius: 10px;
-        }
-        .header-text {
-            text-align: left;
-        }
-        h1 { margin: 0; font-size: 1.8em; }
-        header p { margin: 0; opacity: 0.9; }
-
-        main {
-            padding: 20px;
-            max-width: 900px; /* Un peu plus large pour faire tenir les cartes */
-            margin: 0 auto;
-        }
-
-        /* --- NOUVEAU : LE STYLE DES CARTES --- */
-        .liste-concours {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap; /* Permet aux cartes de passer à la ligne sur mobile */
-            margin-top: 20px;
+            justify-content: space-between; /* Espace entre le logo (si on en met un) et le menu */
+            align-items: center;
+            padding: 20px 40px;
         }
 
-        .carte-concours {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px; /* Coins arrondis */
-            padding: 20px;
-            flex: 1; /* Les cartes prennent la même largeur */
-            min-width: 250px; /* Largeur minimum d'une carte */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Ombre douce */
-            text-align: center;
-            transition: transform 0.2s; /* Petite animation au survol */
+        /* Le menu de navigation */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px; /* Espace entre les liens */
+            margin-left: auto; /* Pousse tout le menu vers la droite */
         }
 
-        .carte-concours:hover {
-            transform: translateY(-5px); /* La carte monte un peu quand on passe la souris */
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-
-        .carte-concours h3 {
-            color: #6a1b9a;
-            margin-top: 0;
-        }
-        
-        .badge {
-            background-color: #e1bee7;
-            color: #4a148c;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-
-        /* --- Fin des nouveaux styles --- */
-
-        .bouton {
-            background-color: #ff4081;
+        nav a {
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 15px;
             font-weight: bold;
         }
-        .bouton:hover {
-            background-color: #f50057; /* Change de couleur au survol */
+
+        /* Le bouton bleu "Connexion" */
+        .btn-connexion {
+            background-color: #00bcd4; /* Bleu cyan */
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white !important; /* Force la couleur blanche */
         }
 
-        footer {
+        /* --- SECTION PRINCIPALE (HERO) --- */
+        .hero-section {
             text-align: center;
-            padding: 20px;
-            background-color: #333; /* Footer sombre maintenant */
-            color: white;
-            margin-top: 40px;
-            font-size: 0.8em;
+            padding: 100px 20px; /* Beaucoup d'espace en haut et en bas */
+            max-width: 800px;
+            margin: 0 auto; /* Centre le bloc */
         }
+
+        /* LE GRAND TITRE AVEC DÉGRADÉ */
+        h1 {
+            font-size: 3.5em; /* Très gros texte */
+            margin-bottom: 20px;
+            font-weight: 800;
+            /* La magie du dégradé (Bleu vers Orange/Jaune) comme sur l'image */
+            background: linear-gradient(to right, #00bcd4, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block; /* Nécessaire pour le dégradé */
+        }
+
+        /* Le sous-titre blanc */
+        .hero-subtitle {
+            font-size: 1.2em;
+            color: #ccc; /* Blanc légèrement grisé */
+            margin-bottom: 40px;
+        }
+
+        /* --- LES BOUTONS D'ACTION --- */
+        .boutons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Style général des boutons */
+        .btn-hero {
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+
+        /* Le bouton bleu plein */
+        .btn-bleu {
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+        }
+        .btn-bleu:hover { background-color: #0097a7; }
+
+        /* Le bouton orange avec bordure uniquement */
+        .btn-outline-orange {
+            background-color: transparent; /* Fond transparent */
+            border: 2px solid #ff9800; /* Bordure orange */
+            color: #ff9800;
+        }
+        .btn-outline-orange:hover { 
+            background-color: #ff9800; 
+            color: white;
+        }
+
     </style>
-  </head>
-  
-  <body>
+</head>
+<body>
 
     <header>
-        <img src="logo.png" alt="Logo Forfeo" class="logo-img">
-        <div class="header-text">
-            <h1>Bienvenue sur Forfeo</h1>
-            <p>Communauté & Concours</p>
-        </div>
-    </header>
-
-    <main>
-        <h2>À propos de nous</h2>
-        <p>
-            Forfeo est une communauté dédiée à l'entraide et au plaisir. 
-            Nous organisons des concours mensuels et soutenons des causes sociales grâce à vos dons.
-        </p>
-
-        <h2>🏆 Concours en cours</h2>
-        
-        <div class="liste-concours">
-            
-            <div class="carte-concours">
-                <span class="badge">Nouveau</span>
-                <h3>Bundle Solidaire</h3>
-                <p>Achetez un pack de jeux et soutenez une association.</p>
-                <p><strong>Prix : 500€ à gagner</strong></p>
-                <a href="#" class="bouton">Participer</a>
-            </div>
-
-            <div class="carte-concours">
-                <span class="badge">Populaire</span>
-                <h3>Grand Tirage Mensuel</h3>
-                <p>Le grand classique de Forfeo. Tirage le 30 du mois.</p>
-                <p><strong>Prix : Carte cadeau</strong></p>
-                <a href="#" class="bouton">S'inscrire</a>
-            </div>
-
-            <div class="carte-concours">
-                <span class="badge">Bientôt</span>
-                <h3>Concours Créatif</h3>
-                <p>Envoyez vos meilleures créations pour le concours d'été.</p>
-                <p><strong>Prix : Surprise !</strong></p>
-                <a href="#" class="bouton">Voir les infos</a>
-            </div>
-
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Forfeo. Tous droits réservés.</p>
-    </footer>
-
-  </body>
-</html>
