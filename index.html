@@ -6,35 +6,41 @@
     <title>Forfeo - Ensemble pour un impact local</title>
     
     <style>
-        /* --- LE STYLE (La peinture) --- */
+        /* --- 1. LE STYLE GÉNÉRAL (Fond bleu foncé) --- */
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0a192f; /* Le fond bleu foncé */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a192f; /* Le fond bleu nuit */
             color: white;
             line-height: 1.6;
             text-align: center;
         }
 
-        /* --- L'EN-TÊTE (Header) --- */
+        /* --- 2. L'EN-TÊTE (Menu + Logo) --- */
         header {
             display: flex;
-            justify-content: space-between; /* Ecarte le logo et le menu au maximum */
+            justify-content: space-between; /* Espace max entre logo et menu */
             align-items: center;
-            padding: 20px 50px; /* Plus d'espace sur les côtés */
+            padding: 20px 50px;
         }
 
-        /* Le Logo */
+        /* Le Logo avec la petite lueur de protection */
         .logo-img {
-            height: 60px; /* Taille du logo ajustée */
+            height: 60px;
             width: auto;
+            /* Cette ligne ajoute une lueur blanche pour que le logo se voie bien sur le bleu */
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); 
+            transition: transform 0.3s;
+        }
+        .logo-img:hover {
+            transform: scale(1.05); /* Le logo grandit un peu quand on le touche */
         }
 
-        /* Le Menu */
+        /* Le Menu de navigation */
         nav {
             display: flex;
-            gap: 30px; /* Espace entre les mots du menu */
+            gap: 30px;
             align-items: center;
         }
 
@@ -42,54 +48,56 @@
             color: #ccc; /* Gris clair */
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 1em;
             transition: color 0.3s;
         }
         
         nav a:hover {
-            color: white; /* Devient blanc quand on passe la souris */
+            color: white; /* Devient blanc au survol */
         }
 
-        /* Bouton Connexion spécial */
+        /* Bouton Connexion bleu cyan */
         .btn-connexion {
             background-color: #00bcd4;
             color: white !important;
             padding: 10px 20px;
-            border-radius: 4px;
+            border-radius: 5px;
             transition: background-color 0.3s;
         }
         .btn-connexion:hover {
             background-color: #008ba3;
         }
 
-        /* --- SECTION PRINCIPALE (Hero) --- */
+        /* --- 3. LA SECTION PRINCIPALE (Le texte au centre) --- */
         .hero-section {
             padding: 100px 20px;
             max-width: 900px;
-            margin: 0 auto; /* Centre le bloc au milieu de l'écran */
+            margin: 0 auto; /* Centre le bloc */
         }
 
+        /* Le gros titre avec dégradé */
         h1 {
-            font-size: 3.5em; /* Gros titre */
+            font-size: 3.5em; /* Très grand texte */
             font-weight: 800;
             margin-bottom: 20px;
-            /* Le dégradé de texte (Bleu -> Orange) */
+            /* Le dégradé Bleu vers Orange */
             background: linear-gradient(to right, #00bcd4, #ff9800);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
 
+        /* Le sous-titre */
         .subtitle {
             font-size: 1.2em;
-            color: #a8b2d1; /* Un gris bleuté très élégant */
+            color: #a8b2d1; /* Gris bleuté */
             margin-bottom: 50px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* --- LES BOUTONS --- */
+        /* --- 4. LES BOUTONS --- */
         .boutons {
             display: flex;
             justify-content: center;
@@ -97,15 +105,15 @@
         }
 
         .btn {
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1em;
-            transition: transform 0.2s; /* Petite animation */
+            transition: transform 0.2s;
         }
         .btn:hover {
-            transform: translateY(-3px); /* Le bouton monte un peu */
+            transform: translateY(-3px); /* Effet de levitation */
         }
 
         .btn-bleu {
@@ -116,6 +124,7 @@
         .btn-orange {
             border: 2px solid #ff9800;
             color: #ff9800;
+            background-color: transparent;
         }
         .btn-orange:hover {
             background-color: #ff9800;
@@ -127,7 +136,7 @@
 <body>
 
     <header>
-        <img src="logo.png" alt="Forfeo Logo" class="logo-img">
+        <img src="logo.png" alt="Logo Forfeo" class="logo-img">
         
         <nav>
             <a href="#">Causes</a>
