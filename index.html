@@ -4,113 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forfeo - Ensemble pour un impact local</title>
+    
     <style>
-        /* --- CONFIGURATION DE BASE --- */
+        /* --- LE STYLE (La peinture) --- */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            /* La couleur de fond foncée de l'image */
-            background-color: #0a192f; 
+            background-color: #0a192f; /* Le fond bleu foncé */
             color: white;
             line-height: 1.6;
+            text-align: center; /* Centre tout le texte par défaut */
         }
 
-        /* --- BARRE DE NAVIGATION (En haut à droite) --- */
+        /* Barre de navigation */
         header {
             display: flex;
-            justify-content: space-between; /* Espace entre le logo (si on en met un) et le menu */
+            justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
         }
 
-        /* Le menu de navigation */
         nav {
+            margin-left: auto;
             display: flex;
+            gap: 20px;
             align-items: center;
-            gap: 30px; /* Espace entre les liens */
-            margin-left: auto; /* Pousse tout le menu vers la droite */
         }
 
         nav a {
-            color: white;
+            color: #ccc;
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9em;
         }
 
-        /* Le bouton bleu "Connexion" */
         .btn-connexion {
-            background-color: #00bcd4; /* Bleu cyan */
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: white !important; /* Force la couleur blanche */
+            background-color: #00bcd4;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 4px;
         }
 
-        /* --- SECTION PRINCIPALE (HERO) --- */
+        /* Section principale */
         .hero-section {
-            text-align: center;
-            padding: 100px 20px; /* Beaucoup d'espace en haut et en bas */
+            padding: 80px 20px;
             max-width: 800px;
-            margin: 0 auto; /* Centre le bloc */
+            margin: 0 auto;
         }
 
-        /* LE GRAND TITRE AVEC DÉGRADÉ */
         h1 {
-            font-size: 3.5em; /* Très gros texte */
-            margin-bottom: 20px;
+            font-size: 3em;
             font-weight: 800;
-            /* La magie du dégradé (Bleu vers Orange/Jaune) comme sur l'image */
+            margin-bottom: 20px;
+            /* Le dégradé de texte */
             background: linear-gradient(to right, #00bcd4, #ff9800);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block; /* Nécessaire pour le dégradé */
+            display: inline-block;
         }
 
-        /* Le sous-titre blanc */
-        .hero-subtitle {
+        .subtitle {
             font-size: 1.2em;
-            color: #ccc; /* Blanc légèrement grisé */
+            color: #ddd;
             margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* --- LES BOUTONS D'ACTION --- */
-        .boutons-container {
+        .boutons {
             display: flex;
             justify-content: center;
             gap: 20px;
         }
 
-        /* Style général des boutons */
-        .btn-hero {
-            padding: 15px 30px;
+        .btn {
+            padding: 15px 25px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1em;
-            transition: 0.3s;
         }
 
-        /* Le bouton bleu plein */
         .btn-bleu {
             background-color: #00bcd4;
             color: white;
-            border: none;
         }
-        .btn-bleu:hover { background-color: #0097a7; }
-
-        /* Le bouton orange avec bordure uniquement */
-        .btn-outline-orange {
-            background-color: transparent; /* Fond transparent */
-            border: 2px solid #ff9800; /* Bordure orange */
+        
+        .btn-orange {
+            border: 2px solid #ff9800;
             color: #ff9800;
         }
-        .btn-outline-orange:hover { 
-            background-color: #ff9800; 
-            color: white;
-        }
-
     </style>
 </head>
+
 <body>
 
     <header>
+        <nav>
+            <a href="#">Causes</a>
+            <a href="#">Concours</a>
+            <a href="#">Bundles</a>
+            <a href="#">Transparence</a>
+            <a href="#" class="btn-connexion">Connexion</a>
+        </nav>
+    </header>
+
+    <main class="hero-section">
+        <h1>Ensemble, pour un impact local durable</h1>
+        
+        <p class="subtitle">
+            Chez Forfeo, chaque expérience que vous vivez contribue directement à soutenir les communautés du Québec.
+        </p>
+
+        <div class="boutons">
+            <a href="#" class="btn btn-bleu">Découvrir les causes</a>
+            <a href="#" class="btn btn-orange">Voir les concours</a>
+        </div>
+    </main>
+
+</body>
+</html>
