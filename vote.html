@@ -8,8 +8,11 @@
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
         .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+        nav { display: flex; gap: 20px; align-items: center; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #64ffda; }
+        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
+        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
         .container { max-width: 800px; margin: 50px auto; padding: 20px; }
         h1 { text-align: center; color: #e6f1ff; margin-bottom: 10px; }
         .subtitle { text-align: center; color: #8892b0; margin-bottom: 40px; }
@@ -32,13 +35,17 @@
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
-            <a href="index.html">Retour à l'accueil</a>
+            <a href="apropos.html">À Propos</a>
+            <a href="causes.html">Causes</a>
+            <a href="index.html#concours">Concours</a>
+            <a href="faq.html">Aide</a>
+            <a href="inscription.html">Participer</a>
+            <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
     <main class="container">
         <h1>La Cause du Mois</h1>
         <p class="subtitle">Aidez-nous à choisir où ira notre prochain don de 1 $ par forfait.</p>
-
         <div class="vote-box">
             <h3 style="color:#64ffda; margin-bottom:20px;">Faites votre choix :</h3>
             <form action="https://api.web3forms.com/submit" method="POST">
@@ -69,7 +76,6 @@
                 <button type="submit" class="btn-vote">Confirmer mon vote</button>
             </form>
         </div>
-
         <div class="results-section">
             <h2 style="text-align:center; color:#e6f1ff; margin-bottom:30px;">Tendances des votes</h2>
             <div class="result-item">
@@ -96,10 +102,8 @@
         </div>
     </main>
     <footer>
-        <p>
-            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
-        </p>
+        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
     </footer>
 </body>
 </html>
