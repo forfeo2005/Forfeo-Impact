@@ -55,15 +55,6 @@
             font-family: inherit;
         }
 
-        /* Style spécial pour l'upload de fichier */
-        input[type="file"] {
-            padding: 10px;
-            background-color: #0a192f;
-            color: #a8b2d1;
-            cursor: pointer;
-            border: 1px dashed #64ffda;
-        }
-
         .btn-submit { 
             width: 100%; 
             padding: 15px; 
@@ -112,10 +103,10 @@
             <h1>Inscription aux Concours</h1>
             <p class="subtitle">Remplissez ce formulaire pour valider votre participation.</p>
 
-            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+            <form action="https://api.web3forms.com/submit" method="POST">
                 
                 <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
-                <input type="hidden" name="subject" value="Nouvelle Inscription Concours">
+                <input type="hidden" name="subject" value="Nouvelle Inscription Concours (via Lien)">
                 
                 <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci.html">
 
@@ -129,19 +120,15 @@
                 <select name="concours" id="concours">
                     <option value="Grand Tirage">Le Grand Tirage (Preuve d'achat)</option>
                     <option value="Escapade de Rêve">Escapade de Rêve</option>
-                    <option value="Vivez l'expérience">Vivez l'expérience (Lien Vidéo)</option>
+                    <option value="Vivez l'expérience">Vivez l'expérience (Vidéo)</option>
                 </select>
 
-                <label for="preuve">Preuve d'achat (Numéro de commande)</label>
+                <label for="preuve">Numéro de commande (Preuve d'achat)</label>
                 <input type="text" name="preuve" id="preuve" placeholder="Ex: #CMD-12345">
 
-                <label for="fichier">Ajouter une Photo (Preuve d'achat / Souvenir)</label>
-                <p class="hint">Formats : .jpg, .png (Max 2 Mo). Pour les vidéos, utilisez le champ lien ci-dessous.</p>
-                <input type="file" name="attachment" id="fichier" accept="image/png, image/jpeg">
-
-                <label for="lien_video">Lien vers votre Vidéo (Obligatoire pour le concours vidéo)</label>
-                <p class="hint">Collez ici le lien de votre vidéo (TikTok, YouTube, Google Drive, etc.)</p>
-                <input type="url" name="lien_video" id="lien_video" placeholder="https://tiktok.com/..." >
+                <label for="lien_contenu">Lien vers votre Photo ou Vidéo</label>
+                <p class="hint">Pour participer, hébergez votre photo ou vidéo sur <strong>Google Drive, WeTransfer, TikTok ou YouTube</strong> et collez le lien ici.</p>
+                <input type="url" name="lien_contenu" id="lien_contenu" placeholder="https://..." required>
 
                 <button type="submit" class="btn-submit">Valider ma participation</button>
             </form>
