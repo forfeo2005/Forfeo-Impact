@@ -7,9 +7,12 @@
     <style>
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
-        .logo-img { height: 50px; width: auto; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+        .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+        nav { display: flex; gap: 20px; align-items: center; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #64ffda; }
+        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
+        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
         .container { max-width: 900px; margin: 60px auto; padding: 20px; }
         h1 { text-align: center; font-size: 2.5em; color: #e6f1ff; margin-bottom: 40px; }
         .about-section { display: flex; align-items: center; gap: 40px; margin-bottom: 60px; flex-wrap: wrap; }
@@ -24,13 +27,16 @@
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
-            <a href="index.html">Retour à l'accueil</a>
+            <a href="apropos.html">À Propos</a>
+            <a href="causes.html">Causes</a>
+            <a href="index.html#concours">Concours</a>
+            <a href="faq.html">Aide</a>
+            <a href="inscription.html">Participer</a>
+            <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
-
     <main class="container">
         <h1>L'histoire de Forfeo</h1>
-
         <div class="about-section">
             <div class="about-text">
                 <h2>Notre Mission</h2>
@@ -39,7 +45,6 @@
             </div>
             <div class="about-img">📷 Photo Équipe / Bureau</div>
         </div>
-
         <div class="about-section" style="flex-direction: row-reverse;">
             <div class="about-text">
                 <h2>Pourquoi le "Double Impact" ?</h2>
@@ -49,12 +54,9 @@
              <div class="about-img">🤝 Photo Engagement</div>
         </div>
     </main>
-
     <footer>
-        <p>
-            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
-        </p>
+        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
     </footer>
 </body>
 </html>
