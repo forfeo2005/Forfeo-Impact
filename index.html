@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forfeo - Ensemble pour un impact local</title>
-    
     <style>
-        /* --- 1. CONFIGURATION GÉNÉRALE (Dark Mode) --- */
         html { scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
 
-        /* --- 2. HEADER & NAVIGATION --- */
+        /* HEADER */
         header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7); }
         .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); transition: transform 0.3s; }
         .logo-img:hover { transform: scale(1.05); }
-        nav { display: flex; gap: 30px; align-items: center; }
+        nav { display: flex; gap: 20px; align-items: center; }
         nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95em; }
         nav a:hover { color: #64ffda; }
         .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
         .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
 
-        /* --- 3. HERO --- */
+        /* HERO */
         .hero-section { padding: 120px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
         h1 { font-size: 4em; font-weight: 800; margin-bottom: 20px; color: #e6f1ff; line-height: 1.1; }
         .highlight { background: linear-gradient(to right, #64ffda, #00bcd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -31,7 +29,7 @@
         .btn-principal { background-color: #64ffda; color: #0a192f; }
         .btn-secondaire { border: 2px solid #64ffda; color: #64ffda; }
 
-        /* Animation Bouton Vote */
+        /* ANIMATION BOUTON VOTE */
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); transform: scale(1); }
             70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); transform: scale(1.05); }
@@ -40,15 +38,15 @@
         .btn-vote-anime { background-color: #112240; color: #64ffda; border: 2px solid #64ffda; padding: 18px 28px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; animation: pulse-green 2s infinite; }
         .btn-vote-anime:hover { background-color: #64ffda; color: #0a192f; animation: none; }
 
-        /* --- 4. COMMENT ÇA MARCHE --- */
+        /* SECTIONS */
         .steps-section { padding: 80px 20px; background-color: #0d1f3a; border-top: 1px solid #1f2f4d; border-bottom: 1px solid #1f2f4d; }
         .step-link { text-decoration: none; display: block; transition: all 0.3s; border-radius: 10px; padding: 10px; }
         .step-link:hover { transform: scale(1.05); background-color: rgba(100, 255, 218, 0.05); box-shadow: 0 0 20px rgba(100, 255, 218, 0.1); }
-
-        /* --- 5. CONCOURS --- */
+        
         .concours-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; margin-bottom: 50px; }
         .section-title { text-align: center; font-size: 2.5em; color: #e6f1ff; margin-bottom: 50px; position: relative; }
         .section-title::after { content: ""; display: block; width: 70px; height: 4px; background-color: #64ffda; margin: 15px auto 0; border-radius: 2px; }
+        
         .cartes-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
         .carte { background-color: #112240; padding: 40px 30px; border-radius: 8px; flex: 1; min-width: 280px; max-width: 350px; box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7); transition: transform 0.3s; position: relative; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
         .carte:hover { transform: translateY(-10px); }
@@ -56,22 +54,23 @@
         .carte h3 { color: #e6f1ff; margin-top: 10px; font-size: 1.5em; }
         .carte p { color: #8892b0; font-size: 1em; margin-bottom: 20px;}
         .prix-a-venir { font-size: 1em !important; color: #64ffda !important; font-style: italic; font-weight: normal; margin: 25px 0; }
+        
         .btn-carte { display: inline-block; border: 1px solid #64ffda; color: #64ffda; text-decoration: none; padding: 12px 25px; border-radius: 4px; transition: all 0.3s; margin-top: 10px; width: 80%; margin-bottom: 10px; }
         .btn-carte:hover { background-color: rgba(100, 255, 218, 0.1); }
         .btn-video { display: inline-block; background-color: #0a192f; color: #64ffda; border: 1px dashed #64ffda; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 0.9em; width: 80%; }
         .btn-video:hover { background-color: #64ffda; color: #0a192f; }
 
-        /* --- FOOTER --- */
         footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; background-color: #0a192f; border-top: 1px solid #1f2f4d; }
     </style>
 </head>
-
 <body>
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
+            <a href="apropos.html">À Propos</a>
             <a href="causes.html">Causes</a>
             <a href="#concours">Concours</a>
+            <a href="faq.html">Aide</a>
             <a href="inscription.html">Participer</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
@@ -150,10 +149,8 @@
     </main>
     
     <footer>
-        <p>
-            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
-        </p>
+        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
     </footer>
 </body>
 </html>
