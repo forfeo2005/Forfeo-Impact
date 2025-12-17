@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide & Contact - Forfeo</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
+        .logo-img { height: 50px; width: auto; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+        nav a:hover { color: #64ffda; }
+        .container { max-width: 800px; margin: 60px auto; padding: 20px; }
+        
+        h1 { text-align: center; color: #e6f1ff; margin-bottom: 40px; }
+        
+        /* Style FAQ (Accordéon simple) */
+        details { background-color: #112240; margin-bottom: 15px; border-radius: 5px; border: 1px solid #233554; overflow: hidden; }
+        summary { padding: 15px; cursor: pointer; font-weight: bold; color: #64ffda; list-style: none; outline: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; float: right; font-weight: bold; }
+        details[open] summary::after { content: '-'; }
+        .faq-content { padding: 15px; border-top: 1px solid #233554; color: #a8b2d1; background-color: #0a192f; }
+
+        /* Formulaire contact */
+        .contact-form { margin-top: 60px; background: #112240; padding: 30px; border-radius: 10px; border: 1px solid #64ffda; }
+        input, textarea, select { width: 100%; padding: 10px; margin-bottom: 15px; background: #0a192f; border: 1px solid #233554; color: #ccd6f6; border-radius: 5px; box-sizing: border-box;}
+        button { background-color: #64ffda; color: #0a192f; padding: 12px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; }
+        button:hover { background-color: #4cdbb3; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
+        <nav>
+            <a href="index.html">Retour à l'accueil</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Foire aux Questions</h1>
+
+        <details>
+            <summary>Comment participer aux concours ?</summary>
+            <div class="faq-content">
+                C'est simple ! Si vous achetez un forfait, vous êtes éligible au "Grand Tirage" et à "Escapade de Rêve". Inscrivez-vous via le formulaire "Participer" avec votre preuve d'achat.
+            </div>
+        </details>
+
+        <details>
+            <summary>Comment envoyer ma vidéo ?</summary>
+            <div class="faq-content">
+                Cliquez sur "Connexion" ou "Vivez l'expérience". Vous devrez héberger votre vidéo sur TikTok, YouTube ou Drive et nous envoyer le lien.
+            </div>
+        </details>
+
+        <details>
+            <summary>Où va l'argent remis à la communauté ?</summary>
+            <div class="faq-content">
+                1 $ par forfait vendu est prélevé sur nos bénéfices. Chaque mois, la communauté vote pour choisir la cause qui recevra les fonds accumulés.
+            </div>
+        </details>
+
+        <div class="contact-form">
+            <h2 style="color:#e6f1ff; text-align:center;">Nous contacter</h2>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
+                <input type="hidden" name="subject" value="Nouveau message Contact Forfeo">
+                <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci.html">
+
+                <label>Votre Email</label>
+                <input type="email" name="email" required placeholder="email@exemple.com">
+
+                <label>Sujet</label>
+                <select name="sujet">
+                    <option>Question sur un forfait</option>
+                    <option>Problème technique</option>
+                    <option>Partenariat / Média</option>
+                    <option>Autre</option>
+                </select>
+
+                <label>Message</label>
+                <textarea name="message" rows="5" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
+
+                <button type="submit">Envoyer le message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
+        </p>
+    </footer>
+</body>
+</html>
