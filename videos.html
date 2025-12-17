@@ -4,117 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vidéos des Forféens - Forfeo</title>
-    
     <style>
-        body { 
-            background-color: #0a192f; 
-            color: #ccd6f6; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center; 
-            margin: 0;
-            padding: 0;
-        }
-
-        header { 
-            padding: 15px 50px; 
-            border-bottom: 1px solid #1f2f4d; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background-color: rgba(10, 25, 47, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        body { background-color: #0a192f; color: #ccd6f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin: 0; padding: 0; }
+        header { padding: 15px 50px; border-bottom: 1px solid #1f2f4d; display: flex; justify-content: space-between; align-items: center; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 100; }
         .logo-img { height: 50px; width: auto; }
-        
         .gallery-container { padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
-        
         h1 { color: #e6f1ff; font-size: 2.5em; margin-bottom: 10px; }
         .subtitle { color: #8892b0; margin-bottom: 50px; font-size: 1.1em; }
-        
-        .gallery { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 30px; 
-        }
-        
-        .video-card { 
-            background: #112240; 
-            padding: 20px; 
-            border-radius: 10px; 
-            width: 300px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
-            border: 1px solid #1f2f4d;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .video-card { background: #112240; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s; border: 1px solid #1f2f4d; display: flex; flex-direction: column; justify-content: space-between; }
         .video-card:hover { transform: translateY(-5px); }
-        
-        .video-placeholder {
-            background: #020c1b; 
-            height: 180px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            color: #64ffda;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            border: 1px dashed #64ffda;
-        }
-
-        /* Style spécifique pour la vignette TikTok */
-        .tiktok-placeholder {
-            background: #000; 
-            height: 180px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 3em;
-        }
-        
+        .video-placeholder { background: #020c1b; height: 180px; display: flex; align-items: center; justify-content: center; color: #64ffda; border-radius: 5px; margin-bottom: 15px; font-weight: bold; border: 1px dashed #64ffda; }
+        .tiktok-placeholder { background: #000; height: 180px; display: flex; align-items: center; justify-content: center; border-radius: 5px; margin-bottom: 15px; font-size: 3em; }
         h3 { color: #e6f1ff; margin: 0 0 10px 0; }
         p { color: #a8b2d1; font-size: 0.9em; margin-bottom: 15px; }
-        
-        .btn-upload { 
-            display: inline-block;
-            margin-top: 50px;
-            background-color: #64ffda;
-            color: #0a192f;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
+        .btn-upload { display: inline-block; margin-top: 50px; background-color: #64ffda; color: #0a192f; text-decoration: none; padding: 15px 30px; border-radius: 5px; font-weight: bold; transition: transform 0.2s; }
         .btn-upload:hover { transform: scale(1.05); }
-
-        /* Bouton TikTok spécifique */
-        .btn-tiktok {
-            display: block; 
-            background-color: #FE2C55; /* Rouge TikTok */
-            color: white; 
-            padding: 10px; 
-            text-decoration: none; 
-            border-radius: 5px; 
-            font-weight: bold;
-            transition: opacity 0.3s;
-        }
+        .btn-tiktok { display: block; background-color: #FE2C55; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.3s; }
         .btn-tiktok:hover { opacity: 0.8; }
-
-        footer {
-            margin-top: 50px;
-            padding: 40px;
-            font-size: 0.9em;
-            color: #8892b0;
-            border-top: 1px solid #1f2f4d;
-        }
+        footer { margin-top: 50px; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; }
     </style>
 </head>
 <body>
@@ -126,40 +34,32 @@
     <div class="gallery-container">
         <h1>La Galerie des Forféens</h1>
         <p class="subtitle">Découvrez les expériences vécues par notre communauté au Québec.</p>
-    
         <div class="gallery">
-            
             <div class="video-card">
                 <h3>Expérience Zabra</h3>
-                
                 <div class="tiktok-placeholder">🎵</div>
-                
                 <p>Découvrez cette expérience en vidéo !</p>
-
-                <a href="https://vt.tiktok.com/ZSPm7ofyH/" target="_blank" class="btn-tiktok">
-                    ▶ Voir sur TikTok
-                </a>
+                <a href="https://vt.tiktok.com/ZSPm7ofyH/" target="_blank" class="btn-tiktok">▶ Voir sur TikTok</a>
             </div>
-            
             <div class="video-card">
                 <h3>Le saut de Marc</h3>
                 <div class="video-placeholder">▶ Vidéo à venir</div>
                 <p>Adrénaline pure avec Forfeo.</p>
             </div>
-
             <div class="video-card">
                 <h3>Escapade Gourmande</h3>
                 <div class="video-placeholder">▶ Vidéo à venir</div>
                 <p>Découverte des saveurs locales.</p>
             </div>
         </div>
-        
         <a href="connexion.html" class="btn-upload">Vous aussi, postez votre vidéo !</a>
     </div>
 
     <footer>
-        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.</p>
+        <p>
+            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
+        </p>
     </footer>
-
 </body>
 </html>
