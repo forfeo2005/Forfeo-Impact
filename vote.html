@@ -4,34 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votez pour la Cause du Mois - Forfeo</title>
+    
     <style>
+        /* --- STYLE DARK MODE --- */
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
+        
+        /* HEADER */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; position: sticky; top: 0; z-index: 1000; }
         .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+        
         nav { display: flex; gap: 20px; align-items: center; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95em; }
         nav a:hover { color: #64ffda; }
+        
         .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
         .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
+        
+        /* CONTENU */
         .container { max-width: 800px; margin: 50px auto; padding: 20px; }
         h1 { text-align: center; color: #e6f1ff; margin-bottom: 10px; }
         .subtitle { text-align: center; color: #8892b0; margin-bottom: 40px; }
+
+        /* BOITE DE VOTE */
         .vote-box { background-color: #112240; padding: 40px; border-radius: 15px; border: 1px solid #1f2f4d; margin-bottom: 50px; }
-        .radio-option { display: block; margin-bottom: 15px; padding: 15px; background: #0a192f; border-radius: 8px; border: 1px solid #233554; cursor: pointer; transition: border 0.3s; }
+        
+        .radio-option {
+            display: block;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #0a192f;
+            border-radius: 8px;
+            border: 1px solid #233554;
+            cursor: pointer;
+            transition: border 0.3s;
+        }
         .radio-option:hover { border-color: #64ffda; }
+        
         input[type="radio"] { margin-right: 10px; accent-color: #64ffda; transform: scale(1.2); }
         label { cursor: pointer; color: #e6f1ff; font-weight: 500; }
-        .btn-vote { width: 100%; padding: 15px; background-color: #64ffda; color: #0a192f; border: none; border-radius: 5px; font-weight: bold; font-size: 1.1em; cursor: pointer; margin-top: 20px; transition: transform 0.2s; }
+
+        .btn-vote {
+            width: 100%;
+            padding: 15px;
+            background-color: #64ffda;
+            color: #0a192f;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
         .btn-vote:hover { transform: translateY(-2px); background-color: #4cdbb3; }
+
+        /* RÉSULTATS */
         .results-section { margin-top: 60px; }
         .result-item { margin-bottom: 25px; }
         .result-label { display: flex; justify-content: space-between; margin-bottom: 5px; color: #a8b2d1; }
         .progress-bg { background-color: #233554; height: 12px; border-radius: 6px; overflow: hidden; }
         .progress-bar { height: 100%; background-color: #64ffda; border-radius: 6px; transition: width 1s; }
-        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; background-color: #0a192f; }
     </style>
 </head>
+
 <body>
+
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
@@ -39,71 +79,93 @@
             <a href="causes.html">Causes</a>
             <a href="index.html#concours">Concours</a>
             <a href="faq.html">Aide</a>
+            <a href="partenaires.html">Espace Organismes</a>
             <a href="inscription.html">Participer</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
+
     <main class="container">
         <h1>La Cause du Mois</h1>
         <p class="subtitle">Aidez-nous à choisir où ira notre prochain don de 1 $ par forfait.</p>
+
         <div class="vote-box">
             <h3 style="color:#64ffda; margin-bottom:20px;">Faites votre choix :</h3>
+            
             <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
                 <input type="hidden" name="subject" value="Nouveau VOTE pour la cause du mois">
+                
                 <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci-vote.html">
 
                 <div class="radio-option">
                     <input type="radio" id="pauvrete" name="vote_cause" value="Solidarité & Pauvreté" required>
                     <label for="pauvrete">🍽️ Solidarité & lutte contre la pauvreté</label>
                 </div>
+
                 <div class="radio-option">
                     <input type="radio" id="itinerance" name="vote_cause" value="Itinérance & Inclusion">
                     <label for="itinerance">🏠 Itinérance & inclusion sociale</label>
                 </div>
+
                 <div class="radio-option">
                     <input type="radio" id="sante" name="vote_cause" value="Santé & Recherche">
                     <label for="sante">❤️ Santé, bien-être et recherche</label>
                 </div>
+
                 <div class="radio-option">
                     <input type="radio" id="jeunesse" name="vote_cause" value="Jeunesse & Éducation">
                     <label for="jeunesse">🎓 Jeunesse & éducation</label>
                 </div>
+
                 <div class="radio-option">
                     <input type="radio" id="env" name="vote_cause" value="Environnement">
                     <label for="env">🌿 Environnement & territoires</label>
                 </div>
+
                 <button type="submit" class="btn-vote">Confirmer mon vote</button>
             </form>
         </div>
+
         <div class="results-section">
             <h2 style="text-align:center; color:#e6f1ff; margin-bottom:30px;">Tendances des votes</h2>
+
             <div class="result-item">
                 <div class="result-label"><span>Jeunesse & éducation</span> <span>35%</span></div>
                 <div class="progress-bg"><div class="progress-bar" style="width: 35%;"></div></div>
             </div>
+
             <div class="result-item">
                 <div class="result-label"><span>Solidarité & pauvreté</span> <span>25%</span></div>
                 <div class="progress-bg"><div class="progress-bar" style="width: 25%;"></div></div>
             </div>
+
             <div class="result-item">
                 <div class="result-label"><span>Environnement</span> <span>20%</span></div>
                 <div class="progress-bg"><div class="progress-bar" style="width: 20%;"></div></div>
             </div>
+
             <div class="result-item">
                 <div class="result-label"><span>Santé & bien-être</span> <span>15%</span></div>
                 <div class="progress-bg"><div class="progress-bar" style="width: 15%;"></div></div>
             </div>
+
             <div class="result-item">
                 <div class="result-label"><span>Itinérance</span> <span>5%</span></div>
                 <div class="progress-bg"><div class="progress-bar" style="width: 5%;"></div></div>
             </div>
+            
             <p style="text-align:center; font-size:0.8em; color:#555; margin-top:20px;">*Mise à jour hebdomadaire par l'équipe Forfeo.</p>
         </div>
+
     </main>
+
     <footer>
-        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
+        <p>
+            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
+        </p>
     </footer>
+
 </body>
 </html>
