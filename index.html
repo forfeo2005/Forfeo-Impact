@@ -155,7 +155,7 @@
         .flex-item { flex: 1; min-width: 250px; }
         .step-link { text-decoration: none; display: block; border-radius: 10px; padding: 10px; }
 
-        .concours-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; margin-bottom: 50px; }
+        .concours-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.5em; color: #e6f1ff; margin-bottom: 50px; }
 
         .cartes-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
@@ -172,66 +172,94 @@
         .btn-carte { display: inline-block; border: 1px solid #64ffda; color: #64ffda; text-decoration: none; padding: 12px 25px; border-radius: 4px; margin-top: 10px; width: 80%; margin-bottom: 10px; }
         .btn-video { display: inline-block; background-color: #0a192f; color: #64ffda; border: 1px dashed #64ffda; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 0.9em; width: 80%; }
 
+        /* --- NOUVEAU : SECTION GALERIE MOSAÏQUE (TENDANCE 2025) --- */
+        .gallery-section {
+            padding: 80px 0; /* Pleine largeur */
+            background-color: #0a192f;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Conteneur des bandes défilantes */
+        .marquee-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espace entre les deux rangées */
+            transform: rotate(-2deg); /* Petite rotation stylée */
+            margin-top: -30px;
+            margin-bottom: 50px;
+        }
+
+        .marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); /* Effet fondu sur les bords */
+        }
+
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            gap: 20px; /* Espace entre les images */
+            justify-content: space-around;
+            min-width: 100%;
+        }
+
+        /* Animation vers la gauche */
+        .scroll-left { animation: scrollLeft 35s linear infinite; }
+        @keyframes scrollLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Animation vers la droite */
+        .scroll-right { animation: scrollRight 35s linear infinite; }
+        @keyframes scrollRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Style des images dans la galerie */
+        .gallery-item {
+            height: 200px; /* Hauteur fixe pour l'alignement */
+            width: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            filter: grayscale(30%); /* Un peu rétro/stylé */
+            border: 1px solid #1f2f4d;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+            filter: grayscale(0%);
+            border-color: #64ffda;
+        }
+        
         /* --- FOOTER & RÉSEAUX SOCIAUX --- */
         footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; background-color: #0a192f; border-top: 1px solid #1f2f4d; }
         
-        .social-title {
-            color: #64ffda;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8em;
-            animation: textPulse 3s infinite;
-        }
-
+        .social-title { color: #64ffda; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8em; animation: textPulse 3s infinite; }
         .social-links { margin-bottom: 30px; display: flex; justify-content: center; gap: 25px; }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #112240;
-            border: 1px solid #233554;
-            color: #a8b2d1;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* L'animation qui fait flotter les icônes */
-            animation: floatingIcon 3s ease-in-out infinite;
-        }
-
+        .social-link { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; background-color: #112240; border: 1px solid #233554; color: #a8b2d1; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); animation: floatingIcon 3s ease-in-out infinite; }
         .social-link svg { width: 24px; height: 24px; fill: currentColor; transition: fill 0.3s; }
-
-        /* Décalage des animations pour que ce soit fluide */
         .social-link:nth-child(1) { animation-delay: 0s; }
         .social-link:nth-child(2) { animation-delay: 0.5s; }
         .social-link:nth-child(3) { animation-delay: 1s; }
-
-        /* Effet au survol (La magie !) */
-        .social-link:hover {
-            background-color: #0a192f;
-            color: #64ffda;
-            border-color: #64ffda;
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 0 15px rgba(100, 255, 218, 0.4); /* Effet Néon */
-        }
-
-        @keyframes floatingIcon {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes textPulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
+        .social-link:hover { background-color: #0a192f; color: #64ffda; border-color: #64ffda; transform: translateY(-8px) scale(1.1); box-shadow: 0 0 15px rgba(100, 255, 218, 0.4); }
+        @keyframes floatingIcon { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
+        @keyframes textPulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
 
         /* =========================================
-           ⚡ VERSION MOBILE OPTIMISÉE (Max 768px) ⚡
+           ⚡ VERSION MOBILE OPTIMISÉE ⚡
         ========================================= */
         @media only screen and (max-width: 768px) {
             .top-banner { flex-direction: column; padding: 15px; text-align: center; line-height: 1.4; }
@@ -244,11 +272,14 @@
             .subtitle { font-size: 1em; padding: 0 10px; }
             .section-title { font-size: 1.8em; margin-bottom: 30px; }
             .hero-section { padding: 60px 15px; }
-            .steps-section, .concours-section { padding: 40px 15px; }
+            .steps-section, .concours-section, .gallery-section { padding: 40px 15px; }
             .boutons { flex-direction: column; width: 100%; gap: 15px; }
             .btn, .btn-vote-anime { width: 100%; text-align: center; justify-content: center; }
             .flex-container, .cartes-container { flex-direction: column; gap: 40px; }
             .flex-item, .carte { width: 100%; min-width: 0; max-width: none; }
+            /* Ajustement galerie mobile */
+            .marquee-wrapper { transform: rotate(0deg); margin-top: 0; gap: 10px; }
+            .gallery-item { height: 150px; }
         }
     </style>
 </head>
@@ -323,7 +354,7 @@
                     </div>
                     <div>
                         <a href="inscription.html" class="btn-carte">Participer</a>
-                        <a href="videos.html" class="btn-video">▶ Vidéo des Forféens</a>
+                        <a href="#galerie-forfeens" class="btn-video">▶ Vidéo & Photos des Forféens</a>
                     </div>
                 </div>
                 <div class="carte">
@@ -347,25 +378,54 @@
             </div>
         </section>
 
+        <section id="galerie-forfeens" class="gallery-section">
+            <div class="gallery-intro">
+                <h2 class="section-title" style="margin-bottom: 20px;">La communauté Forfeo en action</h2>
+                <p class="subtitle">Vos moments, vos expériences, votre impact. Merci de partager la magie !</p>
+            </div>
+
+            <div class="marquee-wrapper">
+                <div class="marquee">
+                    <div class="marquee-content scroll-left">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Experience+Spa+1" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/400x200/112240/64ffda?text=Aventure+Plein+Air" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/250x200/112240/64ffda?text=Restaurant+Chic" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/350x200/112240/64ffda?text=Video+Témoignage" class="gallery-item" alt="Forféen Vidéo">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Moment+Détente" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Experience+Spa+1" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/400x200/112240/64ffda?text=Aventure+Plein+Air" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/250x200/112240/64ffda?text=Restaurant+Chic" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/350x200/112240/64ffda?text=Video+Témoignage" class="gallery-item" alt="Forféen Vidéo">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Moment+Détente" class="gallery-item" alt="Forféen">
+                    </div>
+                </div>
+
+                <div class="marquee">
+                    <div class="marquee-content scroll-right">
+                        <img src="https://placehold.co/350x200/112240/64ffda?text=Sortie+En+Famille" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/250x200/112240/64ffda?text=Video+Action" class="gallery-item" alt="Forféen Vidéo">
+                        <img src="https://placehold.co/400x200/112240/64ffda?text=Escapade+Romantique" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Découverte+Locale" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/280x200/112240/64ffda?text=Plaisir+Gourmand" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/350x200/112240/64ffda?text=Sortie+En+Famille" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/250x200/112240/64ffda?text=Video+Action" class="gallery-item" alt="Forféen Vidéo">
+                        <img src="https://placehold.co/400x200/112240/64ffda?text=Escapade+Romantique" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/300x200/112240/64ffda?text=Découverte+Locale" class="gallery-item" alt="Forféen">
+                        <img src="https://placehold.co/280x200/112240/64ffda?text=Plaisir+Gourmand" class="gallery-item" alt="Forféen">
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
     
     <footer>
         <div class="social-title">Suivez notre impact</div>
-        
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/forfeo-inc-468326385" target="_blank" class="social-link" title="Suivez-nous sur LinkedIn">
-                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-
-            <a href="https://www.facebook.com/share/1Ck2JnHSmf/?mibextid=wwXIfr" target="_blank" class="social-link" title="Suivez-nous sur Facebook">
-                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            
-            <a href="https://www.tiktok.com/@forfeoinc?_r=1&_t=ZS-92Ir0D5AcNA" target="_blank" class="social-link" title="Suivez-nous sur TikTok">
-                <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.88-2.91 6.52-1.78 1.63-4.15 2.5-6.55 2.35-4.51-.27-8.07-4.04-8.03-8.59.04-4.54 3.73-8.24 8.28-8.24.26 0 .52.01.78.04v4.21c-.27-.02-.54-.03-.81-.03-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95c2.18 0 3.95-1.77 3.95-3.95V.02z"/></svg>
-            </a>
+            <a href="https://www.linkedin.com/in/forfeo-inc-468326385" target="_blank" class="social-link" title="Suivez-nous sur LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="https://www.facebook.com/share/1Ck2JnHSmf/?mibextid=wwXIfr" target="_blank" class="social-link" title="Suivez-nous sur Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://www.tiktok.com/@forfeoinc?_r=1&_t=ZS-92Ir0D5AcNA" target="_blank" class="social-link" title="Suivez-nous sur TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.88-2.91 6.52-1.78 1.63-4.15 2.5-6.55 2.35-4.51-.27-8.07-4.04-8.03-8.59.04-4.54 3.73-8.24 8.28-8.24.26 0 .52.01.78.04v4.21c-.27-.02-.54-.03-.81-.03-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95c2.18 0 3.95-1.77 3.95-3.95V.02z"/></svg></a>
         </div>
-
         <p>
             &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
             <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
