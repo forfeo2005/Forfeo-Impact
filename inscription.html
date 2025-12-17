@@ -3,28 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Forfeo</title>
+    <title>Inscription aux Concours - Forfeo</title>
+    
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
-        .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+        /* --- RÈGLE D'OR MOBILE --- */
+        * { box-sizing: border-box; }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #0a192f; 
+            color: #ccd6f6; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+        
+        /* HEADER */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; position: sticky; top: 0; z-index: 1000; }
+        .logo-img { height: 50px; width: auto; }
+        
         nav { display: flex; gap: 20px; align-items: center; }
         nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #64ffda; }
         .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
-        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
-        .container { max-width: 600px; margin: 60px auto; padding: 20px; }
-        .login-box { background-color: #112240; padding: 40px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid #1f2f4d; }
-        h1 { color: #e6f1ff; margin-bottom: 10px; text-align: center; }
-        .desc { color: #8892b0; margin-bottom: 30px; text-align: center; }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; color: #64ffda; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
-        input, select { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #233554; background-color: #0a192f; color: #ccd6f6; font-family: inherit; box-sizing: border-box; }
-        input:focus, select:focus { outline: none; border-color: #64ffda; }
-        .btn-submit { width: 100%; padding: 15px; background-color: #64ffda; color: #0a192f; border: none; border-radius: 5px; font-weight: bold; font-size: 1.1em; cursor: pointer; transition: all 0.2s; margin-top: 10px; }
-        .btn-submit:hover { background-color: #4cdbb3; transform: translateY(-2px); }
-        .btn-retour { display: block; text-align: center; margin-top: 30px; color: #64ffda; text-decoration: none; }
+        
+        /* CONTENU */
+        .container { max-width: 700px; margin: 60px auto; padding: 20px; }
+        
+        .form-box { 
+            background-color: #112240; 
+            padding: 40px; 
+            border-radius: 15px; 
+            border: 1px solid #64ffda; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+
+        h1 { text-align: center; color: #e6f1ff; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #8892b0; margin-bottom: 30px; }
+
+        label { display: block; color: #64ffda; margin-bottom: 8px; font-weight: bold; margin-top: 20px; }
+        
+        input, select, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 5px; 
+            border: 1px solid #233554; 
+            background-color: #0a192f; 
+            color: #ccd6f6; 
+            font-family: inherit;
+        }
+
+        /* Style spécial pour l'upload de fichier */
+        input[type="file"] {
+            padding: 10px;
+            background-color: #0a192f;
+            color: #a8b2d1;
+            cursor: pointer;
+        }
+
+        .btn-submit { 
+            width: 100%; 
+            padding: 15px; 
+            background-color: #64ffda; 
+            color: #0a192f; 
+            border: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            cursor: pointer; 
+            margin-top: 30px; 
+            transition: transform 0.2s; 
+        }
+        .btn-submit:hover { transform: translateY(-2px); background-color: #4cdbb3; }
+        
         footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media only screen and (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 10px; }
+            .logo-img { margin-bottom: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 15px 10px; width: 100%; }
+            
+            .container { margin: 20px auto; padding: 15px; }
+            .form-box { padding: 20px; }
+            h1 { font-size: 2em; }
+        }
     </style>
 </head>
 <body>
@@ -35,41 +99,49 @@
             <a href="causes.html">Causes</a>
             <a href="index.html#concours">Concours</a>
             <a href="faq.html">Aide</a>
-            <a href="inscription.html">Participer</a>
+            <a href="partenaires.html">Espace Organismes</a>
+            <a href="inscription.html" style="color: #64ffda; border-bottom: 1px solid #64ffda;">Participer</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
-    <main class="container">
-        <div class="login-box">
-            <h1>Inscription aux Concours</h1>
-            <p class="desc">Remplissez ce formulaire pour valider votre participation.</p>
-            <form action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
-                <input type="hidden" name="subject" value="Nouvelle Inscription Concours Forfeo">
-                <input type="hidden" name="from_name" value="Site Forfeo Inscription">
-                <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci-inscription.html">
 
-                <div class="input-group">
-                    <label for="name">Votre Nom Complet</label>
-                    <input type="text" name="name" id="name" required placeholder="Ex: Jean Tremblay">
-                </div>
-                <div class="input-group">
-                    <label for="email">Votre Email</label>
-                    <input type="email" name="email" id="email" required placeholder="Ex: contact@email.com">
-                </div>
-                <div class="input-group">
-                    <label for="concours">À quel concours participez-vous ?</label>
-                    <select name="concours" id="concours">
-                        <option value="Grand Tirage">Le Grand Tirage (Inscription simple)</option>
-                        <option value="Escapade">Escapade de Rêve (Via achat de forfait)</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-submit">Valider mon inscription</button>
+    <main class="container">
+        <div class="form-box">
+            <h1>Inscription aux Concours</h1>
+            <p class="subtitle">Remplissez ce formulaire pour valider votre participation.</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+                
+                <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
+                <input type="hidden" name="subject" value="Nouvelle Inscription Concours (+ Fichier)">
+                
+                <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci.html">
+
+                <label for="nom">Nom complet</label>
+                <input type="text" name="nom" id="nom" required placeholder="Votre nom">
+
+                <label for="email">Adresse courriel</label>
+                <input type="email" name="email" id="email" required placeholder="votre@email.com">
+
+                <label for="concours">Choix du concours</label>
+                <select name="concours" id="concours">
+                    <option value="Grand Tirage">Le Grand Tirage (Preuve d'achat)</option>
+                    <option value="Escapade de Rêve">Escapade de Rêve</option>
+                    <option value="Vivez l'expérience">Vivez l'expérience (Photo/Vidéo)</option>
+                </select>
+
+                <label for="preuve">Preuve d'achat ou Numéro de commande</label>
+                <input type="text" name="preuve" id="preuve" placeholder="Ex: #CMD-12345">
+
+                <label for="fichier">Ajouter une Photo ou une Vidéo</label>
+                <p style="font-size: 0.8em; color: #8892b0; margin-bottom: 5px; margin-top: 0;">(Formats acceptés : jpg, png, mp4, mov. Max 10 Mo)</p>
+                <input type="file" name="attachment" id="fichier" accept="image/*,video/*">
+
+                <button type="submit" class="btn-submit">Valider ma participation</button>
             </form>
         </div>
-        <a href="index.html" class="btn-retour">← Retourner au site</a>
     </main>
+
     <footer>
         <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
         <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
