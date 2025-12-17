@@ -81,6 +81,15 @@
         .tuto-step { margin-bottom: 20px; font-size: 0.9em; color: #a8b2d1; }
         .tuto-step strong { color: #64ffda; display:block; margin-bottom:5px;}
         
+        /* Liens cliquables dans le tuto */
+        .tuto-link {
+            color: #64ffda;
+            text-decoration: underline;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .tuto-link:hover { color: #ffffff; }
+
         /* STYLE DES IMAGES TUTORIEL */
         .tuto-img {
             width: 100%;
@@ -160,7 +169,7 @@
                     <div class="tuto-column">
                         <h4>🟦 WeTransfer (Facile)</h4>
                         <div class="tuto-step">
-                            <strong>1. Allez sur wetransfer.com</strong>
+                            <strong>1. Allez sur <a href="https://wetransfer.com" target="_blank" class="tuto-link">wetransfer.com</a></strong>
                             Ajoutez votre fichier vidéo.
                             <img src="https://placehold.co/300x150/0a192f/64ffda?text=WeTransfer:+Ajouter+Fichier" class="tuto-img" alt="WeTransfer Etape 1">
                         </div>
@@ -178,28 +187,38 @@
                     <div class="tuto-column">
                         <h4>🟩 Google Drive</h4>
                         <div class="tuto-step">
-                            <strong>1. Partager</strong>
-                            Clic droit sur la vidéo > Partager.
-                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Drive:+Clic+Droit+Partager" class="tuto-img" alt="Drive Etape 1">
+                            <strong>1. Allez sur <a href="https://drive.google.com" target="_blank" class="tuto-link">Google Drive</a></strong>
+                            Importez votre vidéo.
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Drive:+Importer+Fichier" class="tuto-img" alt="Drive Etape 1">
                         </div>
                         <div class="tuto-step">
-                            <strong>2. Accès Public</strong>
+                            <strong>2. Partager</strong>
+                            Clic droit sur la vidéo > Partager.
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Drive:+Clic+Droit+Partager" class="tuto-img" alt="Drive Etape 2">
+                        </div>
+                        <div class="tuto-step">
+                            <strong>3. Accès Public</strong>
                             Dans "Accès général", choisissez "Tous les utilisateurs disposant du lien".
-                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Drive:+Acces+Public" class="tuto-img" alt="Drive Etape 2">
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Drive:+Acces+Public" class="tuto-img" alt="Drive Etape 3">
                         </div>
                     </div>
 
                     <div class="tuto-column">
                         <h4>⬛ TikTok / ▶ YouTube</h4>
                         <div class="tuto-step">
-                            <strong>1. Partager</strong>
-                            Sur votre vidéo publiée, cliquez sur la flèche de partage.
-                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=TikTok:+Fleche+Partage" class="tuto-img" alt="TikTok Etape 1">
+                            <strong>1. Publiez</strong>
+                            Sur <a href="https://www.tiktok.com" target="_blank" class="tuto-link">TikTok</a> ou <a href="https://www.youtube.com" target="_blank" class="tuto-link">YouTube</a>.
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=Reseau:+Publier+Video" class="tuto-img" alt="Reseau Etape 1">
                         </div>
                         <div class="tuto-step">
-                            <strong>2. Copier le lien</strong>
+                            <strong>2. Partager</strong>
+                            Cliquez sur la flèche de partage.
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=TikTok:+Fleche+Partage" class="tuto-img" alt="TikTok Etape 2">
+                        </div>
+                        <div class="tuto-step">
+                            <strong>3. Copier le lien</strong>
                             Cliquez sur l'icône "Copier le lien" (chaîne).
-                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=TikTok:+Copier+le+Lien" class="tuto-img" alt="TikTok Etape 2">
+                            <img src="https://placehold.co/300x150/0a192f/64ffda?text=TikTok:+Copier+le+Lien" class="tuto-img" alt="TikTok Etape 3">
                         </div>
                     </div>
                 </div>
