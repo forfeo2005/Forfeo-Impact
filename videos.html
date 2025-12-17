@@ -24,6 +24,7 @@
             background-color: rgba(10, 25, 47, 0.95);
             position: sticky;
             top: 0;
+            z-index: 100;
         }
         .logo-img { height: 50px; width: auto; }
         
@@ -47,6 +48,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s;
             border: 1px solid #1f2f4d;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .video-card:hover { transform: translateY(-5px); }
         
@@ -62,9 +66,21 @@
             font-weight: bold;
             border: 1px dashed #64ffda;
         }
+
+        /* Style spécifique pour la vignette TikTok */
+        .tiktok-placeholder {
+            background: #000; 
+            height: 180px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 3em;
+        }
         
         h3 { color: #e6f1ff; margin: 0 0 10px 0; }
-        p { color: #a8b2d1; font-size: 0.9em; }
+        p { color: #a8b2d1; font-size: 0.9em; margin-bottom: 15px; }
         
         .btn-upload { 
             display: inline-block;
@@ -78,6 +94,19 @@
             transition: transform 0.2s;
         }
         .btn-upload:hover { transform: scale(1.05); }
+
+        /* Bouton TikTok spécifique */
+        .btn-tiktok {
+            display: block; 
+            background-color: #FE2C55; /* Rouge TikTok */
+            color: white; 
+            padding: 10px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .btn-tiktok:hover { opacity: 0.8; }
 
         footer {
             margin-top: 50px;
@@ -99,10 +128,17 @@
         <p class="subtitle">Découvrez les expériences vécues par notre communauté au Québec.</p>
     
         <div class="gallery">
+            
             <div class="video-card">
-                <h3>L'expérience de Julie</h3>
-                <div class="video-placeholder">▶ Vidéo à venir</div>
-                <p>Une fin de semaine inoubliable !</p>
+                <h3>Expérience Zabra</h3>
+                
+                <div class="tiktok-placeholder">🎵</div>
+                
+                <p>Découvrez cette expérience en vidéo !</p>
+
+                <a href="https://vt.tiktok.com/ZSPm7ofyH/" target="_blank" class="btn-tiktok">
+                    ▶ Voir sur TikTok
+                </a>
             </div>
             
             <div class="video-card">
