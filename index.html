@@ -20,44 +20,78 @@
             overflow-x: hidden;
         }
 
-        /* --- 2. BANDEAU D'ALERTE ANIMÉ --- */
+        /* --- 2. BANDEAU D'ALERTE "PRESTIGE 2025" --- */
         .top-banner {
-            background: linear-gradient(45deg, #0a192f, #112240, #64ffda, #0a192f);
-            background-size: 400% 400%;
-            color: #ffffff;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #ccd6f6;
             text-align: center;
-            padding: 12px;
+            padding: 12px 20px;
             font-size: 0.95em;
             position: relative;
             z-index: 2000;
-            border-bottom: 1px solid #64ffda;
-            animation: gradientBG 8s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            border-bottom: 2px solid transparent; 
+            background-clip: padding-box; 
         }
 
-        .top-banner strong { color: #ffffff; text-shadow: 0 0 5px rgba(100, 255, 218, 0.5); }
+        /* L'animation de la bordure lumineuse */
+        .top-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0a192f, #64ffda, #00bcd4, #0a192f);
+            background-size: 200% 100%;
+            animation: borderFlow 4s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        .banner-text { font-weight: 500; letter-spacing: 0.5px; }
+        .highlight-neon { color: #64ffda; font-weight: 800; text-shadow: 0 0 10px rgba(100, 255, 218, 0.4); }
+        
+        .sparkle-icon { display: inline-block; animation: spinSparkle 3s infinite linear; }
+        @keyframes spinSparkle {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
         
         .btn-banner {
-            background-color: rgba(10, 25, 47, 0.8);
+            background: transparent;
             color: #64ffda;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 18px;
+            border-radius: 50px;
             text-decoration: none;
             font-size: 0.85em;
-            border: 1px solid #64ffda;
-            transition: all 0.3s;
+            font-weight: bold;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
             white-space: nowrap;
         }
-        .btn-banner:hover { background-color: #64ffda; color: #0a192f; }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .btn-banner:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            border-color: #64ffda;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+            transform: translateY(-1px);
         }
+        
+        .arrow-icon { display: inline-block; transition: transform 0.3s; margin-left: 5px; }
+        .btn-banner:hover .arrow-icon { transform: translateX(4px); }
 
         /* --- 3. HEADER & NAVIGATION --- */
         header {
@@ -94,13 +128,13 @@
             border-radius: 4px;
         }
 
-        /* --- 4. SECTION HERO AVEC LUCIOLES (CREATIVE TOUCH) --- */
+        /* --- 4. SECTION HERO AVEC LUCIOLES --- */
         .hero-section {
             padding: 120px 20px;
             max-width: 1000px;
             margin: 0 auto;
             text-align: center;
-            position: relative; /* Pour contenir les lucioles */
+            position: relative;
         }
 
         /* Animation Lucioles */
@@ -113,10 +147,9 @@
             box-shadow: 0 0 10px #64ffda, 0 0 20px #64ffda;
             opacity: 0;
             animation: fly 10s infinite ease-in-out;
-            pointer-events: none; /* Ne pas gêner le clic */
+            pointer-events: none;
         }
         
-        /* Positions aléatoires des lucioles */
         .f1 { top: 20%; left: 10%; animation-delay: 0s; }
         .f2 { top: 60%; left: 80%; animation-delay: 2s; }
         .f3 { top: 40%; left: 30%; animation-delay: 4s; }
@@ -205,7 +238,7 @@
         .btn-carte { display: inline-block; border: 1px solid #64ffda; color: #64ffda; text-decoration: none; padding: 12px 25px; border-radius: 4px; margin-top: 10px; width: 80%; margin-bottom: 10px; }
         .btn-video { display: inline-block; background-color: #0a192f; color: #64ffda; border: 1px dashed #64ffda; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 0.9em; width: 80%; }
 
-        /* --- NOUVEAU : SECTION GALERIE MOSAÏQUE CLIQUABLE --- */
+        /* --- 6. SECTION GALERIE MOSAÏQUE (CLIQUABLE & ALIGNÉE) --- */
         .gallery-section {
             padding: 80px 0;
             background-color: #0a192f;
@@ -276,9 +309,8 @@
             display: block;
         }
 
-        /* Effet au survol du lien */
         .gallery-link:hover .gallery-item {
-            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5); /* Lueur plus intense */
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5);
             filter: grayscale(0%);
             border-color: #64ffda;
         }
@@ -305,8 +337,7 @@
            ⚡ VERSION MOBILE OPTIMISÉE ⚡
         ========================================= */
         @media only screen and (max-width: 768px) {
-            .top-banner { flex-direction: column; padding: 15px; text-align: center; line-height: 1.4; }
-            .btn-banner { margin-top: 5px; }
+            .top-banner { flex-direction: column; gap: 10px; padding: 15px; text-align: center; }
             header { flex-direction: column; padding: 15px 10px; }
             .logo-img { margin-bottom: 15px; }
             nav { flex-wrap: wrap; justify-content: center; gap: 15px 10px; width: 100%; }
@@ -320,8 +351,6 @@
             .btn, .btn-vote-anime { width: 100%; text-align: center; justify-content: center; }
             .flex-container, .cartes-container { flex-direction: column; gap: 40px; }
             .flex-item, .carte { width: 100%; min-width: 0; max-width: none; }
-            
-            /* Ajustement galerie mobile */
             .gallery-item { height: 150px; }
         }
     </style>
@@ -330,8 +359,13 @@
 <body>
 
     <div class="top-banner">
-        <span>✨ Découvrez le nouveau visage solidaire de Forfeo : <strong>1 % pour le Québec !</strong></span>
-        <a href="#comment-ca-marche" class="btn-banner">En savoir plus</a>
+        <span class="banner-text">
+            <span class="sparkle-icon">✨</span> 
+            Nouveau visage solidaire : <span class="highlight-neon">1 % pour le Québec !</span>
+        </span>
+        <a href="#comment-ca-marche" class="btn-banner">
+            En savoir plus <span class="arrow-icon">→</span>
+        </a>
     </div>
 
     <header>
