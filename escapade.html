@@ -4,81 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escapade de Rêve - Forfeo</title>
-    
     <style>
-        /* --- STYLE GÉNÉRAL (Dark Mode) --- */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
-            line-height: 1.6;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background-color: rgba(10, 25, 47, 0.95);
-            border-bottom: 1px solid #1f2f4d;
-        }
-
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
         .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
-        
         nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; margin-left: 20px; transition: color 0.3s; }
         nav a:hover { color: #64ffda; }
-
-        .container {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 20px;
-        }
-
-        /* --- STYLE DE LA BOITE D'INFO --- */
-        .info-box {
-            background-color: #112240;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            border: 1px solid #64ffda;
-            text-align: center;
-        }
-
+        .container { max-width: 800px; margin: 60px auto; padding: 20px; }
+        .info-box { background-color: #112240; padding: 50px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid #64ffda; text-align: center; }
         h1 { color: #e6f1ff; margin-bottom: 20px; font-size: 2.5em; }
         .subtitle { color: #a8b2d1; font-size: 1.2em; margin-bottom: 40px; }
-
-        .valeur-prix {
-            font-size: 1.5em;
-            color: #64ffda;
-            font-weight: bold;
-            margin: 30px 0;
-            padding: 20px;
-            border-top: 1px solid #1f2f4d;
-            border-bottom: 1px solid #1f2f4d;
-        }
-
-        .prix-a-venir {
-            font-size: 1.1em;
-            color: #64ffda;
-            font-style: italic;
-            margin-top: 30px;
-        }
-
-        .btn-retour {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #64ffda;
-            text-decoration: none;
-        }
+        .valeur-prix { font-size: 1.5em; color: #64ffda; font-weight: bold; margin: 30px 0; padding: 20px; border-top: 1px solid #1f2f4d; border-bottom: 1px solid #1f2f4d; }
+        .prix-a-venir { font-size: 1.1em; color: #64ffda; font-style: italic; margin-top: 30px; }
+        .btn-retour { display: block; text-align: center; margin-top: 30px; color: #64ffda; text-decoration: none; }
         .btn-retour:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
     </style>
 </head>
-
 <body>
-
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
@@ -89,23 +32,19 @@
     <main class="container">
         <div class="info-box">
             <h1>Escapade de Rêve</h1>
-            <p class="subtitle">
-                Pour chaque forfait acheté, 1 $ est versé à une cause sociale et vous courez la chance de gagner une escapade inoubliable !
-            </p>
-
-            <div class="valeur-prix">
-                🎁 Valeur du prix : 500 $
-            </div>
-
-            <p>
-                Imaginez-vous profiter d'un moment de détente bien mérité, tout en sachant que votre achat a contribué à aider la communauté.
-            </p>
-
+            <p class="subtitle">Pour chaque forfait acheté, 1 $ est versé à une cause sociale et vous courez la chance de gagner une escapade inoubliable !</p>
+            <div class="valeur-prix">🎁 Valeur du prix : 500 $</div>
+            <p>Imaginez-vous profiter d'un moment de détente bien mérité, tout en sachant que votre achat a contribué à aider la communauté.</p>
             <p class="prix-a-venir">Détails du concours et prix à venir...</p>
         </div>
-        
         <a href="index.html" class="btn-retour">← Retourner aux concours</a>
     </main>
 
+    <footer>
+        <p>
+            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
+        </p>
+    </footer>
 </body>
 </html>
