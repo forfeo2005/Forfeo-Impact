@@ -91,7 +91,12 @@
             color: #8892b0;
         }
 
-        .boutons { display: flex; justify-content: center; gap: 20px; }
+        .boutons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            flex-wrap: wrap; /* Pour que ça passe sur mobile */
+        }
 
         .btn {
             padding: 18px 28px;
@@ -106,6 +111,34 @@
         .btn-principal { background-color: #64ffda; color: #0a192f; }
         .btn-secondaire { border: 2px solid #64ffda; color: #64ffda; }
 
+        /* --- NOUVEAU : ANIMATION DU BOUTON CAUSE DU MOIS --- */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); transform: scale(1); }
+        }
+
+        .btn-vote-anime {
+            background-color: #112240; /* Fond sombre */
+            color: #64ffda; /* Texte vert */
+            border: 2px solid #64ffda;
+            padding: 18px 28px;
+            border-radius: 50px; /* Arrondi */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse-green 2s infinite; /* L'animation est ici */
+        }
+        
+        .btn-vote-anime:hover {
+            background-color: #64ffda;
+            color: #0a192f;
+            animation: none; /* Arrête l'animation au survol */
+        }
+
         /* --- 4. SECTION COMMENT ÇA MARCHE --- */
         .steps-section {
             padding: 80px 20px;
@@ -114,7 +147,6 @@
             border-bottom: 1px solid #1f2f4d;
         }
 
-        /* Style pour le lien cliquable de l'étape 1 */
         .step-link {
             text-decoration: none;
             display: block;
@@ -192,7 +224,6 @@
         .carte h3 { color: #e6f1ff; margin-top: 10px; font-size: 1.5em; }
         .carte p { color: #8892b0; font-size: 1em; margin-bottom: 20px;}
 
-        /* Style pour le texte "Prix à venir" */
         .prix-a-venir {
             font-size: 1em !important;
             color: #64ffda !important;
@@ -217,12 +248,11 @@
             background-color: rgba(100, 255, 218, 0.1);
         }
 
-        /* Bouton spécifique pour la vidéo */
         .btn-video {
             display: inline-block;
-            background-color: #0a192f; /* Fond sombre */
+            background-color: #0a192f;
             color: #64ffda;
-            border: 1px dashed #64ffda; /* Bordure pointillée pour se démarquer */
+            border: 1px dashed #64ffda;
             padding: 10px 20px;
             border-radius: 4px;
             text-decoration: none;
@@ -231,7 +261,6 @@
         }
         .btn-video:hover { background-color: #64ffda; color: #0a192f; }
 
-        /* --- 7. FOOTER --- */
         footer {
             text-align: center;
             padding: 40px;
@@ -247,7 +276,6 @@
 
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
-        
         <nav>
             <a href="causes.html">Causes</a>
             <a href="#concours">Concours</a>
@@ -263,24 +291,25 @@
             <p class="subtitle">
                 Chez Forfeo, chaque expérience que vous vivez contribue directement à soutenir les communautés du Québec.
             </p>
+            
             <div class="boutons">
                 <a href="causes.html" class="btn btn-principal">Découvrir les causes</a>
+                
+                <a href="vote.html" class="btn-vote-anime">🗳️ Voter pour la cause du mois</a>
+                
                 <a href="#comment-ca-marche" class="btn btn-secondaire">Comment ça marche ?</a>
             </div>
         </section>
 
         <section id="comment-ca-marche" class="steps-section">
             <h2 class="section-title">Comment ça marche ?</h2>
-            
             <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; text-align: center;">
                 
                 <div style="flex: 1; min-width: 250px;">
                     <a href="https://isow.forfeo.com/giftcards" target="_blank" class="step-link" title="Cliquez pour choisir votre forfait">
                         <div style="font-size: 3em; margin-bottom: 10px;">🎯</div>
                         <h3 style="color: #e6f1ff;">1. Choisissez</h3>
-                        <p style="color: #a8b2d1;">
-                            Choisissez votre forfait.
-                        </p>
+                        <p style="color: #a8b2d1;">Choisissez votre forfait.</p>
                         <span style="color: #64ffda; font-size: 0.8em; text-decoration: underline;">Accéder à la boutique →</span>
                     </a>
                 </div>
@@ -288,19 +317,14 @@
                 <div style="flex: 1; min-width: 250px; padding: 10px;">
                     <div style="font-size: 3em; margin-bottom: 10px;">❤️</div>
                     <h3 style="color: #e6f1ff;">2. Soutenez</h3>
-                    <p style="color: #a8b2d1;">
-                        1 $ est reversé à une cause que Forfeo soutient.
-                    </p>
+                    <p style="color: #a8b2d1;">1 $ est reversé à une cause que Forfeo soutient.</p>
                 </div>
 
                 <div style="flex: 1; min-width: 250px; padding: 10px;">
                     <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
                     <h3 style="color: #e6f1ff;">3. Gagnez</h3>
-                    <p style="color: #a8b2d1;">
-                        Vous êtes automatiquement inscrit et courez la chance de gagner à l'un de nos concours du moment.
-                    </p>
+                    <p style="color: #a8b2d1;">Vous êtes automatiquement inscrit et courez la chance de gagner à l'un de nos concours du moment.</p>
                 </div>
-
             </div>
         </section>
 
@@ -325,7 +349,7 @@
                     <div>
                         <span class="badge">Populaire</span>
                         <h3>Le Grand Tirage</h3>
-                        <p>Tentez votre chance ! Chaque don vous qualifie automatiquement pour remporter le prix trimestriel.</p>
+                        <p>Tentez votre chance ! Chaque forfait acheté vous qualifie automatiquement pour remporter le prix trimestriel.</p>
                         <p class="prix-a-venir">Détails du concours et prix à venir...</p>
                     </div>
                     <a href="inscription.html" class="btn-carte">S'inscrire</a>
