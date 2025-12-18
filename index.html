@@ -162,42 +162,96 @@
         .gallery-link:hover .gallery-item { box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5); filter: grayscale(0%); border-color: #64ffda; }
         .gallery-link:hover { transform: scale(1.05); z-index: 10; }
 
-        /* --- 7. CARTE IMPACT --- */
+        /* --- 7. CARTE IMPACT & RECHERCHE --- */
         .map-section {
             padding: 80px 20px;
             background-color: #0d1f3a;
             position: relative;
         }
-        #map {
-            height: 450px;
-            width: 100%;
+        
+        .map-container {
             max-width: 1000px;
             margin: 0 auto;
-            border-radius: 15px;
-            border: 2px solid #64ffda;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 1; 
+            position: relative;
+            /* Effet 3D Holographique */
+            perspective: 1000px;
         }
 
-        /* --- 8. CHATBOT FORFY --- */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid #64ffda;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            z-index: 1;
+            /* Petite inclinaison si on veut un effet tablette, sinon flat mais profond */
+            transform-style: preserve-3d;
+        }
+
+        /* Overlay de recherche */
+        .map-search-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000; /* Au-dessus de la carte */
+            background: rgba(10, 25, 47, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #64ffda;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .map-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 5px;
+            width: 200px;
+            outline: none;
+        }
+        .map-btn {
+            background: #64ffda;
+            color: #0a192f;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- 8. CHATBOT FORFY (VIDEO) --- */
         .chat-widget-btn {
-            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px;
             background-color: #64ffda; border-radius: 50%; display: flex; justify-content: center; align-items: center;
             cursor: pointer; box-shadow: 0 0 20px rgba(100, 255, 218, 0.4); z-index: 9999;
-            transition: transform 0.3s; animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s; animation: float 3s ease-in-out infinite; overflow: hidden; border: 2px solid #64ffda;
         }
+        
+        /* Vidéo Avatar */
+        .chat-video-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         .chat-widget-btn:hover { transform: scale(1.1); }
-        .chat-icon { font-size: 30px; }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
         .chat-window {
-            position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px;
+            position: fixed; bottom: 110px; right: 30px; width: 350px; height: 500px;
             background-color: #112240; border-radius: 15px; border: 1px solid #64ffda;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6); z-index: 9998;
             display: none; flex-direction: column; overflow: hidden;
         }
         .chat-header { background-color: #0a192f; padding: 15px; border-bottom: 1px solid #233554; display: flex; justify-content: space-between; align-items: center; }
         .chat-header h4 { margin: 0; color: #e6f1ff; }
+        
+        /* Avatar dans le header du chat aussi */
+        .header-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #64ffda; }
+
         .close-chat { cursor: pointer; color: #8892b0; font-weight: bold; }
         .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .message { padding: 10px 15px; border-radius: 10px; font-size: 0.9em; max-width: 80%; }
@@ -247,6 +301,8 @@
             .step-dot { margin-bottom: 0; }
             .newsletter-form { flex-direction: column; }
             .chat-window { width: 90%; right: 5%; bottom: 100px; height: 60vh; }
+            .map-search-overlay { width: 90%; top: 10px; left: 5%; }
+            .map-input { width: 100%; }
         }
     </style>
 </head>
@@ -373,16 +429,37 @@
         </section>
 
         <section class="map-section">
-            <h2 class="section-title">Carte de l'Impact</h2>
-            <p style="text-align: center; color: #8892b0; margin-bottom: 30px;">Découvrez les organismes communautaires que nous soutenons partout au Québec.</p>
-            <div id="map"></div>
+            <div class="map-container">
+                <div class="map-search-overlay">
+                    <input type="text" id="mapSearch" class="map-input" placeholder="Trouver un organisme..." onkeypress="if(event.key==='Enter') searchMap()">
+                    <button class="map-btn" onclick="searchMap()">Chercher</button>
+                </div>
+                <h2 class="section-title" style="text-align:center; color:#e6f1ff; padding-top:20px; text-shadow:0 0 10px rgba(0,0,0,0.5);">Carte de l'Impact Social</h2>
+                <div id="map"></div>
+            </div>
         </section>
 
-        <div class="chat-widget-btn" onclick="toggleChat()"><span class="chat-icon">🐶</span></div>
+        <div class="chat-widget-btn" onclick="toggleChat()">
+            <video src="GifForfy.MP4" autoplay loop muted playsinline class="chat-video-icon"></video>
+        </div>
+
         <div class="chat-window" id="chatWindow">
-            <div class="chat-header"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.5em;">🐶</span><div><h4>Forfy</h4><span style="font-size:0.7em; color:#64ffda;">Assistant Dons & Impact</span></div></div><span class="close-chat" onclick="toggleChat()">✕</span></div>
-            <div class="chat-body" id="chatBody"><div class="message bot-msg">Wouf ! Je suis l'expert en dons de Forfeo. Posez-moi une question sur le 1% ou les organismes partenaires !</div></div>
-            <div class="chat-input-area"><input type="text" id="userInput" class="chat-input" placeholder="Ex: Comment voter ?" onkeypress="handleKeyPress(event)"><button class="send-btn" onclick="sendMessage()">➤</button></div>
+            <div class="chat-header">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <video src="GifForfy.MP4" autoplay loop muted playsinline class="header-avatar"></video>
+                    <div><h4>Forfy</h4><span style="font-size:0.7em; color:#64ffda;">Assistant Dons & Impact</span></div>
+                </div>
+                <span class="close-chat" onclick="toggleChat()">✕</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="message bot-msg">
+                    Wouf ! Je suis Forfy 🐾.<br>Je connais tout sur Forfeo : comment participer, les causes soutenues, les concours... Posez-moi une question !
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="userInput" class="chat-input" placeholder="Ex: Comment s'inscrire ?" onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">➤</button>
+            </div>
         </div>
 
     </main>
@@ -390,9 +467,9 @@
     <footer>
         <div class="social-title">Suivez notre impact</div>
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/forfeo-inc-468326385" target="_blank" class="social-link" title="Suivez-nous sur LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-            <a href="https://www.facebook.com/share/1Ck2JnHSmf/?mibextid=wwXIfr" target="_blank" class="social-link" title="Suivez-nous sur Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="https://www.tiktok.com/@forfeoinc?_r=1&_t=ZS-92Ir0D5AcNA" target="_blank" class="social-link" title="Suivez-nous sur TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.88-2.91 6.52-1.78 1.63-4.15 2.5-6.55 2.35-4.51-.27-8.07-4.04-8.03-8.59.04-4.54 3.73-8.24 8.28-8.24.26 0 .52.01.78.04v4.21c-.27-.02-.54-.03-.81-.03-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95c2.18 0 3.95-1.77 3.95-3.95V.02z"/></svg></a>
+            <a href="https://www.linkedin.com/in/forfeo-inc-468326385" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="https://www.facebook.com/share/1Ck2JnHSmf/?mibextid=wwXIfr" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://www.tiktok.com/@forfeoinc?_r=1&_t=ZS-92Ir0D5AcNA" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.88-2.91 6.52-1.78 1.63-4.15 2.5-6.55 2.35-4.51-.27-8.07-4.04-8.03-8.59.04-4.54 3.73-8.24 8.28-8.24.26 0 .52.01.78.04v4.21c-.27-.02-.54-.03-.81-.03-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95c2.18 0 3.95-1.77 3.95-3.95V.02z"/></svg></a>
         </div>
         <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br><a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
     </footer>
@@ -414,40 +491,64 @@
             if (distance < 0) { clearInterval(timer); document.getElementById("countdown").innerHTML = "<h3 style='color:#64ffda'>C'est parti !</h3>"; }
         }, 1000);
 
-        // --- 2. CARTE IMPACT (Leaflet) ---
-        var map = L.map('map').setView([46.8139, -71.2080], 6); // Vue large Québec
+        // --- 2. CARTE IMPACT & RECHERCHE ---
+        // Vue centrée sur le Québec, zoom ajusté
+        var map = L.map('map').setView([46.8139, -71.2080], 6); 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains: 'abcd', maxZoom: 19
         }).addTo(map);
 
-        // Icône Coeur (Pour l'Impact Social)
         var impactIcon = L.divIcon({
             className: 'custom-div-icon',
-            html: "<div style='font-size:20px;'>❤️</div>",
-            iconSize: [25, 25], iconAnchor: [12, 12]
+            html: "<div style='font-size:24px; text-shadow:0 0 10px #64ffda;'>❤️</div>",
+            iconSize: [30, 30], iconAnchor: [15, 15]
         });
 
-        // Données des Organismes (Exemples)
+        // Liste des organismes (Données de test)
         var impactPoints = [
-            { "nom": "Moisson Québec", "lat": 46.8139, "lon": -71.2080, "desc": "Banque alimentaire" },
-            { "nom": "Dans la rue", "lat": 45.5017, "lon": -73.5673, "desc": "Aide aux jeunes sans-abri" },
-            { "nom": "SPA Estrie", "lat": 45.4042, "lon": -71.8929, "desc": "Refuge animalier" },
-            { "nom": "Maison des Jeunes", "lat": 48.4284, "lon": -71.0601, "desc": "Soutien jeunesse Saguenay" }
+            { "nom": "Moisson Québec", "lat": 46.8139, "lon": -71.2080, "desc": "Banque alimentaire de la Capitale." },
+            { "nom": "Dans la rue", "lat": 45.5017, "lon": -73.5673, "desc": "Aide aux jeunes sans-abri à Montréal." },
+            { "nom": "SPA Estrie", "lat": 45.4042, "lon": -71.8929, "desc": "Refuge animalier et adoption." },
+            { "nom": "Maison des Jeunes Saguenay", "lat": 48.4284, "lon": -71.0601, "desc": "Soutien et activités pour les jeunes." },
+            { "nom": "Centre Femmes Charlevoix", "lat": 47.6259, "lon": -70.3622, "desc": "Lieu d'entraide et de soutien." }
         ];
 
+        // Ajouter les points sur la carte
         impactPoints.forEach(point => {
-            L.marker([point.lat, point.lon], { icon: impactIcon }).addTo(map).bindPopup(`<b style="color:#0a192f">${point.nom}</b><br>${point.desc}`);
+            L.marker([point.lat, point.lon], { icon: impactIcon }).addTo(map).bindPopup(`<b style="color:#0a192f; font-size:1.1em;">${point.nom}</b><br>${point.desc}`);
         });
 
-        // --- 3. IA LOCALE "FORFY EXPERT DONS" ---
-        // Base de connaissance (Cerveau du chien)
+        // Fonction de recherche
+        function searchMap() {
+            var input = document.getElementById('mapSearch').value.toLowerCase();
+            if(!input) return;
+
+            var found = impactPoints.find(p => p.nom.toLowerCase().includes(input));
+            
+            if(found) {
+                // Animation "FlyTo" vers le point trouvé
+                map.flyTo([found.lat, found.lon], 13, { duration: 2 });
+                // Ouvrir le popup après le vol
+                setTimeout(() => {
+                    L.popup().setLatLng([found.lat, found.lon])
+                      .setContent(`<b style="color:#0a192f">${found.nom}</b><br>${found.desc}`)
+                      .openOn(map);
+                }, 2000);
+            } else {
+                alert("Organisme non trouvé sur la carte pour l'instant.");
+            }
+        }
+
+        // --- 3. IA FORFY (CERVEAU COMPLET) ---
         const knowledgeBase = [
-            { keys: ["don", "argent", "pourcentage", "1%", "sous"], resp: "Forfeo s'engage à reverser **1 % de ses bénéfices nets** directement aux organismes. C'est de l'argent frais pour leur mission !" },
-            { keys: ["organisme", "partenaire", "association", "obnl"], resp: "Nous soutenons des OBNL enregistrés au Québec (Moisson, Refuges, etc.). Voir la <a href='partenaires.html' style='color:#64ffda'>page Partenaires</a> pour s'inscrire." },
-            { keys: ["vote", "choisir", "gagner", "sélection"], resp: "Chaque mois, c'est VOUS (la communauté) qui votez pour la cause qui recevra le don. Rendez-vous sur la page <a href='vote.html' style='color:#64ffda'>Vote</a>." },
-            { keys: ["reçu", "impôt", "fiscal", "taxe"], resp: "Comme c'est Forfeo qui effectue le don corporatif à même ses profits, nous ne pouvons pas émettre de reçus fiscaux aux clients individuels." },
-            { keys: ["forfait", "achat", "prix", "acheter"], resp: "Je suis spécialisé dans les dons ! Pour acheter un forfait, visitez notre site principal <a href='https://isow.forfeo.com' target='_blank' style='color:#64ffda'>Forfeo.com</a>." },
-            { keys: ["bonjour", "salut", "allo", "hey"], resp: "Wouf ! Bonjour ! Comment puis-je vous aider concernant notre mission sociale ?" }
+            { keys: ["participer", "jouer", "inscription", "comment faire", "marche"], resp: "Pour participer, c'est simple !<br>1. Achetez un forfait sur <a href='https://isow.forfeo.com' style='color:#64ffda'>Forfeo.com</a>.<br>2. 1% va dans la cagnotte.<br>3. Votez pour la cause du mois ici même !" },
+            { keys: ["cause", "organisme", "partenaire", "association", "soutenir"], resp: "Nous soutenons des organismes enregistrés au Québec (Moisson, SPA, Refuges...). Vous êtes un organisme ? Inscrivez-vous sur la page <a href='partenaires.html' style='color:#64ffda'>Partenaires</a>." },
+            { keys: ["vote", "choisir", "gagner", "sélection"], resp: "Le vote se fait chaque mois. C'est la communauté qui décide quel organisme reçoit le don accumulé. Allez sur l'onglet <a href='vote.html' style='color:#64ffda'>Vote</a>." },
+            { keys: ["concours", "gagner", "prix", "tirage"], resp: "Nous avons plusieurs concours ! L'Escapade de Rêve et le Grand Tirage. Visitez la section <a href='#concours' style='color:#64ffda'>Concours</a> pour les détails." },
+            { keys: ["connexion", "compte", "login", "connecter"], resp: "Le bouton de connexion est en haut à droite. Il vous permet de gérer vos votes et vos participations aux concours." },
+            { keys: ["argent", "don", "1%", "combien", "sous"], resp: "Forfeo s'engage à reverser **1 % de ses bénéfices nets**. C'est de l'argent frais qui ne coûte rien de plus au client !" },
+            { keys: ["contact", "équipe", "parler", "humain"], resp: "Vous pouvez contacter notre équipe via la page <a href='faq.html' style='color:#64ffda'>Aide</a> ou nous suivre sur les réseaux sociaux !" },
+            { keys: ["bonjour", "salut", "allo", "hey"], resp: "Wouf ! Bonjour ! Je suis prêt à vous guider sur le site." }
         ];
 
         function toggleChat() {
@@ -459,13 +560,12 @@
 
         function findResponse(text) {
             text = text.toLowerCase();
-            // Chercher une correspondance par mots-clés
             for (let item of knowledgeBase) {
                 for (let key of item.keys) {
                     if (text.includes(key)) return item.resp;
                 }
             }
-            return "Je ne suis pas sûr de comprendre. Je suis un expert en **dons** et **organismes**. Essayez de reformuler ! 🐶";
+            return "Je ne suis pas sûr de comprendre. Je connais tout sur les **concours**, les **organismes** et comment **participer**. Essayez un mot-clé ! 🐶";
         }
 
         function sendMessage() {
@@ -476,12 +576,11 @@
             addMessage(messageText, 'user-msg');
             input.value = "";
 
-            // Simulation de réflexion
             var chatBody = document.getElementById('chatBody');
             var loadingDiv = document.createElement('div');
             loadingDiv.className = 'message bot-msg';
             loadingDiv.id = 'loading';
-            loadingDiv.innerHTML = '<em>Forfy flaire la réponse... 👃</em>';
+            loadingDiv.innerHTML = '<em>Forfy réfléchit... 🦴</em>';
             chatBody.appendChild(loadingDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -489,7 +588,7 @@
                 document.getElementById('loading').remove();
                 let botResponse = findResponse(messageText);
                 addMessage(botResponse, 'bot-msg');
-            }, 800);
+            }, 600);
         }
 
         function addMessage(text, className) {
