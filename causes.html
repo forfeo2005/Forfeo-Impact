@@ -3,61 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forfeo - Nos Causes Sociales</title>
+    <title>Les Causes Soutenues - Forfeo</title>
     <style>
-        /* --- RÈGLE D'OR MOBILE --- */
+        /* --- CONFIGURATION GÉNÉRALE --- */
+        html { scroll-behavior: smooth; }
         * { box-sizing: border-box; }
-        
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; overflow-x: hidden; }
-        
-        /* HEADER */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; position: sticky; top: 0; z-index: 1000; }
-        .logo-img { height: 50px; width: auto; }
-        
-        nav { display: flex; gap: 20px; align-items: center; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: #64ffda; }
-        
-        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
-        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
-        
-        /* CONTENU */
-        .container { max-width: 900px; margin: 60px auto; padding: 20px; }
-        h1 { text-align: center; font-size: 3em; color: #e6f1ff; margin-bottom: 20px; }
-        
-        .intro-text { text-align: center; margin-bottom: 60px; font-size: 1.2em; color: #a8b2d1; max-width: 800px; margin-left: auto; margin-right: auto; }
-        
-        .cause-card { background-color: #112240; border-radius: 10px; padding: 35px; margin-bottom: 30px; box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7); border-left: 5px solid #64ffda; transition: transform 0.3s; }
-        .cause-card h2 { color: #64ffda; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-        .slogan { font-style: italic; color: #e6f1ff; font-weight: bold; display: block; margin-bottom: 15px; }
-        
-        .btn-retour { display: inline-block; margin-top: 40px; color: #64ffda; text-decoration: none; border: 1px solid #64ffda; padding: 12px 30px; border-radius: 5px; transition: background-color 0.3s; font-weight: bold; }
-        
-        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
 
-        /* --- MOBILE OPTIMIZATION --- */
-        @media only screen and (max-width: 768px) {
-            header { flex-direction: column; padding: 15px 10px; }
-            .logo-img { margin-bottom: 15px; }
-            nav { flex-wrap: wrap; justify-content: center; gap: 15px 10px; width: 100%; }
-            
-            h1 { font-size: 2em; line-height: 1.2; }
-            .intro-text { font-size: 1em; padding: 0 10px; margin-bottom: 30px; }
-            .container { margin: 30px auto; padding: 15px; }
-            
-            .cause-card { padding: 20px; }
-            .cause-card h2 { font-size: 1.3em; flex-direction: column; align-items: flex-start; }
-            
-            .btn-retour { width: 100%; text-align: center; display: block; box-sizing: border-box; }
-        }
+        /* HEADER */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; }
+        .logo-img { height: 50px; }
+        nav { display: flex; gap: 20px; align-items: center; }
+        nav a { color: #a8b2d1; text-decoration: none; transition: color 0.3s; }
+        nav a:hover { color: #64ffda; }
+        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; }
+
+        /* HERO CAUSES */
+        .hero { text-align: center; padding: 80px 20px; border-bottom: 1px solid #1f2f4d; }
+        h1 { color: #e6f1ff; font-size: 2.5em; margin-bottom: 20px; }
+        .subtitle { max-width: 700px; margin: 0 auto; color: #8892b0; }
+
+        /* GRILLE DES CAUSES */
+        .causes-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .cause-card { background-color: #112240; border-radius: 10px; overflow: hidden; width: 300px; transition: transform 0.3s; border: 1px solid transparent; }
+        .cause-card:hover { transform: translateY(-5px); border-color: #64ffda; }
+        .cause-img { width: 100%; height: 180px; object-fit: cover; background-color: #233554; }
+        .cause-content { padding: 25px; }
+        .cause-tag { background: rgba(100, 255, 218, 0.1); color: #64ffda; padding: 5px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
+        .cause-card h3 { color: #e6f1ff; margin: 15px 0 10px 0; }
+        .cause-desc { font-size: 0.9em; color: #8892b0; margin-bottom: 20px; }
+        .btn-soutenir { display: block; text-align: center; background: transparent; border: 1px solid #64ffda; color: #64ffda; padding: 10px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+        .btn-soutenir:hover { background: rgba(100, 255, 218, 0.1); }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; border-top: 1px solid #1f2f4d; color: #8892b0; background-color: #0a192f; }
+
+        @media (max-width: 768px) { header { flex-direction: column; gap: 15px; padding: 15px; } nav { flex-wrap: wrap; justify-content: center; } }
     </style>
 </head>
 <body>
+
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
             <a href="apropos.html">À Propos</a>
-            <a href="causes.html">Causes</a>
+            <a href="causes.html" style="color:#64ffda;">Causes</a>
             <a href="index.html#concours">Concours</a>
             <a href="faq.html">Aide</a>
             <a href="partenaires.html">Espace Organismes</a>
@@ -66,51 +56,69 @@
         </nav>
     </header>
 
-    <main class="container">
-        <h1>Les causes que Forfeo soutient</h1>
-        <div class="intro-text">
-            <p><strong style="color: #e6f1ff;">Chez Forfeo, chaque expérience a un double impact : votre plaisir et votre soutien à la communauté.</strong></p>
-            <p>Pour chaque forfait acheté, vous participez directement à l'impact local. Forfeo s'engage à reverser <strong>1 % de ses bénéfices</strong> à la communauté pour chaque expérience vendue.</p>
-            <p>Nous soutenons des organismes locaux qui œuvrent concrètement sur le terrain, là où les besoins sont réels.</p>
-        </div>
-        
-        <div class="cause-card">
-            <h2>🍽️ Solidarité & pauvreté</h2>
-            <span class="slogan">Parce qu’une expérience commence par un besoin essentiel comblé.</span>
-            <p>Grâce à chaque forfait acheté, Forfeo finance des banques alimentaires et des organismes communautaires qui luttent contre l’insécurité alimentaire au Québec.</p>
-        </div>
-        <div class="cause-card">
-            <h2>🏠 Itinérance & inclusion</h2>
-            <span class="slogan">Personne ne devrait être invisible.</span>
-            <p>Sur chaque achat, une partie des bénéfices est reversée pour soutenir l'hébergement, les repas et la réinsertion sociale des personnes en situation d’itinérance.</p>
-        </div>
-        <div class="cause-card">
-            <h2>❤️ Santé & Recherche</h2>
-            <span class="slogan">Améliorer la qualité de vie, à tout âge.</span>
-            <p>Vos achats contribuent directement au financement d’initiatives en santé, à la recherche sur les maladies chroniques et au soutien des soins à domicile.</p>
-        </div>
-        <div class="cause-card">
-            <h2>🎓 Jeunesse & éducation</h2>
-            <span class="slogan">Investir dans l’avenir, une expérience à la fois.</span>
-            <p>Grâce à votre choix de Forfeo, nous soutenons financièrement des organismes qui luttent contre le décrochage scolaire et favorisent l’égalité des chances pour les jeunes.</p>
-        </div>
-        <div class="cause-card">
-            <h2>🌿 Environnement</h2>
-            <span class="slogan">Protéger ce qui rend nos expériences possibles.</span>
-            <p>Pour chaque forfait vendu, Forfeo investit dans des actions environnementales locales : nettoyage des berges, verdissement urbain et protection de la nature.</p>
-        </div>
+    <main>
+        <section class="hero">
+            <h1>Des causes qui nous tiennent à cœur</h1>
+            <p class="subtitle">Chaque mois, nous mettons en lumière des enjeux cruciaux pour le Québec. Voici les secteurs que votre achat local aide à soutenir.</p>
+        </section>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <p style="color: #e6f1ff; margin-bottom: 15px;">Vous voulez influencer notre prochain don de 1 % des bénéfices ?</p>
-            <a href="vote.html" class="btn-retour" style="background-color: #64ffda; color: #0a192f;">🗳️ Voter pour la cause du mois</a>
-        </div>
-        <div style="text-align: center;">
-            <a href="index.html" class="btn-retour" style="border: none; color: #8892b0; font-size: 0.9em; margin-top: 10px;">← Retourner à l'accueil</a>
+        <div class="causes-grid">
+            <div class="cause-card">
+                <img src="https://placehold.co/300x180/112240/64ffda?text=Alimentaire" alt="Aide Alimentaire" class="cause-img">
+                <div class="cause-content">
+                    <span class="cause-tag">Essentiel</span>
+                    <h3>Sécurité Alimentaire</h3>
+                    <p class="cause-desc">Soutien aux banques alimentaires (Moisson) pour que personne ne dorme le ventre vide.</p>
+                    <a href="vote.html" class="btn-soutenir">Voter pour cette cause</a>
+                </div>
+            </div>
+
+            <div class="cause-card">
+                <img src="https://placehold.co/300x180/112240/64ffda?text=Jeunesse" alt="Jeunesse" class="cause-img">
+                <div class="cause-content">
+                    <span class="cause-tag">Avenir</span>
+                    <h3>Jeunesse & Éducation</h3>
+                    <p class="cause-desc">Aide aux devoirs, maisons des jeunes et soutien aux enfants en difficulté.</p>
+                    <a href="vote.html" class="btn-soutenir">Voter pour cette cause</a>
+                </div>
+            </div>
+
+            <div class="cause-card">
+                <img src="https://placehold.co/300x180/112240/64ffda?text=Animaux" alt="Animaux" class="cause-img">
+                <div class="cause-content">
+                    <span class="cause-tag">Protection</span>
+                    <h3>Bien-être Animal</h3>
+                    <p class="cause-desc">Soutien aux refuges (SPA/SPCA) pour soigner et reloger les animaux abandonnés.</p>
+                    <a href="vote.html" class="btn-soutenir">Voter pour cette cause</a>
+                </div>
+            </div>
+
+            <div class="cause-card">
+                <img src="https://placehold.co/300x180/112240/64ffda?text=Femmes" alt="Femmes" class="cause-img">
+                <div class="cause-content">
+                    <span class="cause-tag">Solidarité</span>
+                    <h3>Soutien aux Femmes</h3>
+                    <p class="cause-desc">Maisons d'hébergement et centres d'aide pour les femmes en difficulté.</p>
+                    <a href="vote.html" class="btn-soutenir">Voter pour cette cause</a>
+                </div>
+            </div>
+
+            <div class="cause-card">
+                <img src="https://placehold.co/300x180/112240/64ffda?text=Environnement" alt="Environnement" class="cause-img">
+                <div class="cause-content">
+                    <span class="cause-tag">Planète</span>
+                    <h3>Environnement</h3>
+                    <p class="cause-desc">Projets de verdissement urbain et protection de nos forêts québécoises.</p>
+                    <a href="vote.html" class="btn-soutenir">Voter pour cette cause</a>
+                </div>
+            </div>
         </div>
     </main>
+
     <footer>
-        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
+        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br><a href="confidentialite.html" style="color: #64ffda;">Politique de confidentialité</a></p>
     </footer>
+
+    <script src="forfy.js"></script>
 </body>
 </html>
