@@ -16,14 +16,18 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; }
         h1 { color: #e6f1ff; font-size: 2.5em; }
         
-        .gallery-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; }
+        /* GALERIE */
+        .gallery-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 60px; }
         .video-item { width: 300px; background: #112240; padding: 10px; border-radius: 10px; border: 1px solid #233554; }
         .video-thumb { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
+        .video-item p { font-weight: bold; color: #e6f1ff; margin-top: 10px; }
         
-        /* FAQ VIDEO */
-        .video-faq { margin-top: 60px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; }
-        details { background: rgba(100, 255, 218, 0.05); margin-bottom: 10px; padding: 15px; border-radius: 5px; border: 1px solid #64ffda; }
-        summary { color: #64ffda; font-weight: bold; cursor: pointer; }
+        /* TUTORIEL ÉTAPES */
+        .tutorial-box { background: rgba(100, 255, 218, 0.05); padding: 40px; border-radius: 15px; border: 1px dashed #64ffda; margin-top: 60px; text-align: left; }
+        .tuto-steps { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 30px; text-align: center; }
+        .tuto-step { flex: 1; min-width: 200px; }
+        .step-num { font-size: 2em; color: #64ffda; font-weight: bold; display: block; margin-bottom: 10px; }
+        .step-desc { color: #a8b2d1; font-size: 0.9em; }
 
         footer { text-align: center; padding: 40px; border-top: 1px solid #1f2f4d; color: #8892b0; background-color: #0a192f; }
         .social-links { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; }
@@ -55,16 +59,25 @@
             <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Resto" class="video-thumb"><p>Souper gastronomique</p></div>
         </div>
 
-        <div class="video-faq">
-            <h2 style="color:#e6f1ff; text-align:center;">FAQ Vidéo : Participez !</h2>
-            <details>
-                <summary>Comment envoyer ma vidéo ?</summary>
-                <p style="margin-top:10px;">Vous pouvez nous envoyer votre fichier via WeTransfer à <b>videos@forfeo.com</b> ou simplement nous taguer sur les réseaux sociaux avec #Forfeo.</p>
-            </details>
-            <details>
-                <summary>Quel format est accepté ?</summary>
-                <p style="margin-top:10px;">Nous acceptons les formats MP4 et MOV, filmés à l'horizontale ou à la verticale (pour TikTok/Reels).</p>
-            </details>
+        <div class="tutorial-box">
+            <h2 style="color:#e6f1ff; text-align:center; margin-top:0;">🎥 Tutoriel : Comment envoyer votre vidéo ?</h2>
+            <div class="tuto-steps">
+                <div class="tuto-step">
+                    <span class="step-num">1</span>
+                    <h4 style="color:#fff;">Filmez</h4>
+                    <p class="step-desc">Filmez votre expérience Forfeo (format vertical ou horizontal) avec votre téléphone.</p>
+                </div>
+                <div class="tuto-step">
+                    <span class="step-num">2</span>
+                    <h4 style="color:#fff;">Envoyez</h4>
+                    <p class="step-desc">Envoyez le fichier via <b>WeTransfer</b> à <a href="mailto:videos@forfeo.com" style="color:#64ffda">videos@forfeo.com</a> ou taguez <b>#Forfeo</b> sur TikTok.</p>
+                </div>
+                <div class="tuto-step">
+                    <span class="step-num">3</span>
+                    <h4 style="color:#fff;">Gagnez</h4>
+                    <p class="step-desc">Si votre vidéo est sélectionnée pour la galerie, vous recevez un code rabais exclusif !</p>
+                </div>
+            </div>
         </div>
     </div>
 
