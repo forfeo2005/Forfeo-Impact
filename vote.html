@@ -3,49 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote du Mois - Forfeo</title>
+    <title>Vote - Forfeo</title>
     <style>
-        /* BASE CSS */
-        html { scroll-behavior: smooth; }
-        * { box-sizing: border-box; }
+        /* BASE */
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
-
-        /* HEADER */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; }
         .logo-img { height: 50px; }
         nav { display: flex; gap: 20px; align-items: center; }
         nav a { color: #a8b2d1; text-decoration: none; }
         nav a:hover { color: #64ffda; }
         .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; }
 
-        /* VOTE SECTION */
-        .vote-container { max-width: 900px; margin: 60px auto; padding: 20px; text-align: center; }
-        h1 { font-size: 2.5em; color: #e6f1ff; margin-bottom: 10px; }
-        .vote-intro { color: #8892b0; margin-bottom: 50px; }
-
-        .vote-options { display: flex; flex-direction: column; gap: 20px; }
-        .vote-card { 
-            background: #112240; border: 1px solid #233554; padding: 20px; border-radius: 10px; 
-            display: flex; align-items: center; justify-content: space-between; transition: all 0.3s; cursor: pointer;
-        }
-        .vote-card:hover { border-color: #64ffda; transform: scale(1.02); }
-        .vote-card.selected { border-color: #64ffda; background: rgba(100, 255, 218, 0.05); }
+        .container { max-width: 900px; margin: 60px auto; padding: 20px; text-align: center; }
+        h1 { color: #e6f1ff; }
         
-        .vote-info { text-align: left; flex: 1; }
-        .vote-info h3 { margin: 0 0 5px 0; color: #e6f1ff; }
-        .vote-info p { margin: 0; font-size: 0.9em; color: #8892b0; }
-        
-        .vote-btn-action {
-            background: transparent; border: 2px solid #64ffda; color: #64ffda; padding: 10px 25px; 
-            border-radius: 50px; font-weight: bold; cursor: pointer; transition: background 0.3s;
-        }
-        .vote-card:hover .vote-btn-action { background: #64ffda; color: #0a192f; }
+        .vote-card { background: #112240; border: 1px solid #233554; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: left; display: flex; align-items: center; gap: 20px; transition: 0.3s; }
+        .vote-card:hover { border-color: #64ffda; }
+        .vote-btn { margin-left: auto; background: transparent; border: 1px solid #64ffda; color: #64ffda; padding: 8px 20px; border-radius: 50px; cursor: pointer; }
+        .vote-btn:hover { background: #64ffda; color: #0a192f; }
 
-        /* PROGRESS BAR (Simulation résultats) */
-        .progress-bg { height: 6px; background: #0a192f; border-radius: 3px; margin-top: 15px; width: 100%; overflow: hidden; }
-        .progress-fill { height: 100%; background: #64ffda; width: 0%; transition: width 1s ease-out; }
+        /* GAMIFICATION (NOUVEAU CLIENT) */
+        .gamification-box { margin-top: 60px; padding: 30px; background: rgba(100, 255, 218, 0.05); border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.2); }
+        .badges { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .badge { background: #112240; padding: 15px; border-radius: 50%; border: 2px solid #233554; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; opacity: 0.5; filter: grayscale(100%); transition: all 0.3s; }
+        .badge:hover { transform: scale(1.1); }
+        .badge.active { opacity: 1; filter: none; border-color: #64ffda; box-shadow: 0 0 15px rgba(100,255,218,0.3); }
 
-        @media (max-width: 768px) { header { flex-direction: column; } .vote-card { flex-direction: column; text-align: center; gap: 15px; } .vote-info { text-align: center; } }
+        @media (max-width: 768px) { header { flex-direction: column; } .vote-card { flex-direction: column; text-align: center; } .vote-btn { margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
@@ -55,59 +39,45 @@
         <nav>
             <a href="apropos.html">À Propos</a>
             <a href="causes.html">Causes</a>
-            <a href="index.html#concours">Concours</a>
-            <a href="faq.html">Aide</a>
-            <a href="partenaires.html">Espace Organismes</a>
-            <a href="inscription.html">Participer</a>
+            <a href="vote.html" style="color:#64ffda;">Vote</a>
+            <a href="partenaires.html">Organismes</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
 
-    <main class="vote-container">
-        <h1>C'est à vous de décider !</h1>
-        <p class="vote-intro">Votez pour la cause qui recevra le don du mois. (Clôture du vote : 30 du mois)</p>
+    <div class="container">
+        <h1>Votez pour l'impact (Simulation)</h1>
+        <p style="color:#8892b0; margin-bottom:40px;">En tant qu'utilisateur, vous avez le pouvoir. Voici les finalistes de ce mois-ci.</p>
 
-        <div class="vote-options">
-            
-            <div class="vote-card" onclick="alert('Merci pour votre vote ! (Simulation)')">
-                <div style="font-size: 2.5em; margin-right: 20px;">🍎</div>
-                <div class="vote-info">
-                    <h3>Moisson Québec</h3>
-                    <p>Aide alimentaire pour les familles de la Capitale-Nationale.</p>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 45%;"></div></div>
-                    <small style="color:#64ffda;">45% des votes</small>
-                </div>
-                <button class="vote-btn-action">Voter</button>
+        <div class="vote-card">
+            <div style="font-size: 2.5em;">🍎</div>
+            <div>
+                <h3 style="margin:0; color:#e6f1ff;">Moisson Québec</h3>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Aide alimentaire d'urgence.</p>
             </div>
-
-            <div class="vote-card" onclick="alert('Merci pour votre vote ! (Simulation)')">
-                <div style="font-size: 2.5em; margin-right: 20px;">🐶</div>
-                <div class="vote-info">
-                    <h3>SPA de l'Estrie</h3>
-                    <p>Soins vétérinaires et adoption pour animaux abandonnés.</p>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 30%;"></div></div>
-                    <small style="color:#64ffda;">30% des votes</small>
-                </div>
-                <button class="vote-btn-action">Voter</button>
-            </div>
-
-            <div class="vote-card" onclick="alert('Merci pour votre vote ! (Simulation)')">
-                <div style="font-size: 2.5em; margin-right: 20px;">🌲</div>
-                <div class="vote-info">
-                    <h3>Action Boréale</h3>
-                    <p>Protection de la forêt boréale et sensibilisation.</p>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 25%;"></div></div>
-                    <small style="color:#64ffda;">25% des votes</small>
-                </div>
-                <button class="vote-btn-action">Voter</button>
-            </div>
-
+            <button class="vote-btn" onclick="alert('Vote enregistré ! (Démo)')">Voter</button>
         </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 Forfeo. <a href="confidentialite.html" style="color: #64ffda;">Règlements du vote</a></p>
-    </footer>
+        <div class="vote-card">
+            <div style="font-size: 2.5em;">🌲</div>
+            <div>
+                <h3 style="margin:0; color:#e6f1ff;">Action Boréale</h3>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Protection de la forêt et biodiversité.</p>
+            </div>
+            <button class="vote-btn" onclick="alert('Vote enregistré ! (Démo)')">Voter</button>
+        </div>
+
+        <div class="gamification-box">
+            <h3 style="color:#e6f1ff; margin:0;">🏆 Vos Futurs Badges d'Impact</h3>
+            <p style="font-size:0.9em; margin-top:10px;">Bientôt : Plus vous votez et participez, plus vous débloquez de statuts et d'avantages exclusifs !</p>
+            <div class="badges">
+                <div class="badge active" title="Débutant">🌱</div>
+                <div class="badge" title="Actif (Bientôt)">🌿</div>
+                <div class="badge" title="Ambassadeur (Bientôt)">🌳</div>
+                <div class="badge" title="Légende (Bientôt)">👑</div>
+            </div>
+        </div>
+    </div>
 
     <script src="forfy.js"></script>
 </body>
