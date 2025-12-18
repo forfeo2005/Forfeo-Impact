@@ -201,7 +201,6 @@
             background-color: #64ffda; border-radius: 50%; display: flex; justify-content: center; align-items: center;
             cursor: pointer; box-shadow: 0 0 20px rgba(100, 255, 218, 0.4); z-index: 9999;
             transition: transform 0.3s; animation: float 3s ease-in-out infinite;
-            /* Important pour que la bulle soit relative à ce bouton */
             position: fixed; 
         }
         
@@ -210,13 +209,13 @@
         .chat-widget-btn:hover { transform: scale(1.1); }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-        /* NOUVEAU : La Bulle d'aide au-dessus du chien */
+        /* BULLE D'AIDE (TOOLTIP) MODIFIÉE */
         .chat-tooltip {
             position: absolute;
-            bottom: 85px; /* Juste au-dessus du bouton de 70px */
+            bottom: 85px; 
             left: 50%;
             transform: translateX(-50%);
-            background-color: #e6f1ff; /* Fond clair pour le contraste */
+            background-color: #e6f1ff; 
             color: #0a192f;
             padding: 8px 15px;
             border-radius: 20px;
@@ -224,11 +223,10 @@
             font-weight: bold;
             white-space: nowrap;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            opacity: 0; /* Caché au début */
-            animation: tooltipPopup 4s ease-in-out infinite; /* Animation cyclique */
-            pointer-events: none; /* Le clic passe au travers */
+            opacity: 0;
+            animation: tooltipPopup 4s ease-in-out infinite;
+            pointer-events: none;
         }
-        /* Petite flèche sous la bulle */
         .chat-tooltip::after {
             content: '';
             position: absolute;
@@ -443,7 +441,7 @@
         </section>
 
         <div class="chat-widget-btn" onclick="toggleChat()">
-            <div class="chat-tooltip">Besoin d'aide ? Wouf !</div>
+            <div class="chat-tooltip">Besoin d'aide ?</div>
             <video src="GifForfy.MP4" autoplay loop muted playsinline class="chat-video-icon"></video>
         </div>
 
