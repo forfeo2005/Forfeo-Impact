@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forfeo - Ensemble pour un impact local</title>
     
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <style>
         /* --- 1. CONFIGURATION GÉNÉRALE --- */
         html { scroll-behavior: smooth; }
@@ -102,8 +105,6 @@
 
         .launch-header { text-align: center; position: relative; z-index: 2; margin-bottom: 40px; }
         .launch-header h3 { color: #e6f1ff; font-size: 1.8em; margin: 0 0 10px 0; }
-        
-        /* TEXTE MODIFIÉ ICI */
         .launch-header p { color: #64ffda; font-weight: bold; margin: 0; font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; }
 
         .countdown-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; position: relative; z-index: 2; flex-wrap: wrap; }
@@ -161,6 +162,51 @@
         .gallery-link:hover .gallery-item { box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5); filter: grayscale(0%); border-color: #64ffda; }
         .gallery-link:hover { transform: scale(1.05); z-index: 10; }
 
+        /* --- 7. CARTE IMPACT --- */
+        .map-section {
+            padding: 80px 20px;
+            background-color: #0d1f3a;
+            position: relative;
+        }
+        #map {
+            height: 450px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 15px;
+            border: 2px solid #64ffda;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1; 
+        }
+
+        /* --- 8. CHATBOT FORFY --- */
+        .chat-widget-btn {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background-color: #64ffda; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; box-shadow: 0 0 20px rgba(100, 255, 218, 0.4); z-index: 9999;
+            transition: transform 0.3s; animation: float 3s ease-in-out infinite;
+        }
+        .chat-widget-btn:hover { transform: scale(1.1); }
+        .chat-icon { font-size: 30px; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        .chat-window {
+            position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px;
+            background-color: #112240; border-radius: 15px; border: 1px solid #64ffda;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); z-index: 9998;
+            display: none; flex-direction: column; overflow: hidden;
+        }
+        .chat-header { background-color: #0a192f; padding: 15px; border-bottom: 1px solid #233554; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { margin: 0; color: #e6f1ff; }
+        .close-chat { cursor: pointer; color: #8892b0; font-weight: bold; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { padding: 10px 15px; border-radius: 10px; font-size: 0.9em; max-width: 80%; }
+        .bot-msg { background-color: #233554; color: #ccd6f6; align-self: flex-start; border-bottom-left-radius: 0; }
+        .user-msg { background-color: #64ffda; color: #0a192f; align-self: flex-end; border-bottom-right-radius: 0; font-weight: 500; }
+        .chat-input-area { padding: 15px; background-color: #0a192f; border-top: 1px solid #233554; display: flex; gap: 10px; }
+        .chat-input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid #233554; background-color: #112240; color: #fff; outline: none; }
+        .send-btn { background: none; border: none; color: #64ffda; cursor: pointer; font-size: 1.2em; }
+
         /* FOOTER */
         footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; background-color: #0a192f; border-top: 1px solid #1f2f4d; }
         .social-title { color: #64ffda; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8em; animation: textPulse 3s infinite; }
@@ -200,6 +246,7 @@
             .timeline-step { flex-direction: row; gap: 20px; align-items: center; width: 100%; text-align: left; }
             .step-dot { margin-bottom: 0; }
             .newsletter-form { flex-direction: column; }
+            .chat-window { width: 90%; right: 5%; bottom: 100px; height: 60vh; }
         }
     </style>
 </head>
@@ -245,49 +292,30 @@
                 <p>🚀 En route vers l'impact</p>
                 <h3>Le compte à rebours est lancé</h3>
             </div>
-
             <div class="countdown-container" id="countdown">
                 <div class="countdown-box"><span class="count-number" id="days">00</span><span class="count-label">Jours</span></div>
                 <div class="countdown-box"><span class="count-number" id="hours">00</span><span class="count-label">Heures</span></div>
                 <div class="countdown-box"><span class="count-number" id="minutes">00</span><span class="count-label">Min</span></div>
                 <div class="countdown-box"><span class="count-number" id="seconds">00</span><span class="count-label">Sec</span></div>
             </div>
-
             <div class="timeline-wrapper">
                 <div class="timeline-line">
                     <div class="timeline-bg"></div>
                     <div class="timeline-progress"></div>
-                    
-                    <div class="timeline-step step-completed">
-                        <div class="step-dot">✓</div>
-                        <div class="step-text"><h4>Concept</h4><p>Création</p></div>
-                    </div>
-                    <div class="timeline-step step-active">
-                        <div class="step-dot"><div class="ping"></div></div>
-                        <div class="step-text"><h4 style="color:#64ffda;">Construction</h4><p>En cours</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-dot">3</div>
-                        <div class="step-text"><h4>Lancement</h4><p>2026</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-dot">4</div>
-                        <div class="step-text"><h4>1er Don</h4><p>Impact</p></div>
-                    </div>
+                    <div class="timeline-step step-completed"><div class="step-dot">✓</div><div class="step-text"><h4>Concept</h4><p>Création</p></div></div>
+                    <div class="timeline-step step-active"><div class="step-dot"><div class="ping"></div></div><div class="step-text"><h4 style="color:#64ffda;">Construction</h4><p>En cours</p></div></div>
+                    <div class="timeline-step"><div class="step-dot">3</div><div class="step-text"><h4>Lancement</h4><p>2026</p></div></div>
+                    <div class="timeline-step"><div class="step-dot">4</div><div class="step-text"><h4>1er Don</h4><p>Impact</p></div></div>
                 </div>
             </div>
-
             <div class="launch-cta">
                 <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:10px;">
-                    <span style="font-size:1.5em;">🔔</span>
-                    <h4 style="margin:0;">Soyez les premiers informés</h4>
+                    <span style="font-size:1.5em;">🔔</span><h4 style="margin:0;">Soyez les premiers informés</h4>
                 </div>
                 <form action="https://api.web3forms.com/submit" method="POST" class="newsletter-form">
-                    
                     <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
                     <input type="hidden" name="subject" value="Nouvel Abonné : Forfeo Don & Communauté">
                     <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci-newsletter.html">
-                    
                     <input type="email" name="email" class="newsletter-input" placeholder="Votre adresse courriel" required>
                     <button type="submit" class="newsletter-btn">M'inscrire</button>
                 </form>
@@ -322,74 +350,40 @@
             <h2 class="section-title">Concours en vedette</h2>
             <div class="cartes-container">
                 <div class="carte">
-                    <div>
-                        <span class="badge">Nouveau</span>
-                        <h3>Vivez l’expérience. Partagez-la.</h3>
-                        <p>Diffusez votre expérience réservée avec Forfeo et obtenez la chance de recevoir des avantages exclusifs.</p>
-                        <p class="prix-a-venir">Détails du concours et prix à venir...</p>
-                    </div>
-                    <div>
-                        <a href="inscription.html" class="btn-carte">Participer</a>
-                        <a href="#galerie-forfeens" class="btn-video">▶ Vidéo des Forféens</a>
-                    </div>
+                    <div><span class="badge">Nouveau</span><h3>Vivez l’expérience. Partagez-la.</h3><p>Diffusez votre expérience réservée avec Forfeo et obtenez la chance de recevoir des avantages exclusifs.</p><p class="prix-a-venir">Détails du concours et prix à venir...</p></div>
+                    <div><a href="inscription.html" class="btn-carte">Participer</a><a href="#galerie-forfeens" class="btn-video">▶ Vidéo des Forféens</a></div>
                 </div>
                 <div class="carte">
-                    <div>
-                        <span class="badge">Populaire</span>
-                        <h3>Le Grand Tirage</h3>
-                        <p>Tentez votre chance ! Chaque forfait acheté vous qualifie automatiquement pour remporter le prix trimestriel.</p>
-                        <p class="prix-a-venir">Détails du concours et prix à venir...</p>
-                    </div>
+                    <div><span class="badge">Populaire</span><h3>Le Grand Tirage</h3><p>Tentez votre chance ! Chaque forfait acheté vous qualifie automatiquement pour remporter le prix trimestriel.</p><p class="prix-a-venir">Détails du concours et prix à venir...</p></div>
                     <a href="inscription.html" class="btn-carte">S'inscrire</a>
                 </div>
                 <div class="carte">
-                    <div>
-                        <span class="badge">Vedette</span>
-                        <h3>Escapade de Rêve</h3>
-                        <p>Pour chaque forfait acheté, 1 % des bénéfices est versé à une cause sociale. Courez la chance de gagner une escapade !</p>
-                        <p class="prix-a-venir">Détails du concours et prix à venir...</p>
-                    </div>
+                    <div><span class="badge">Vedette</span><h3>Escapade de Rêve</h3><p>Pour chaque forfait acheté, 1 % des bénéfices est versé à une cause sociale. Courez la chance de gagner une escapade !</p><p class="prix-a-venir">Détails du concours et prix à venir...</p></div>
                     <a href="escapade.html" class="btn-carte">Voir les infos</a>
                 </div>
             </div>
         </section>
 
         <section id="galerie-forfeens" class="gallery-section">
-            <div class="gallery-intro">
-                <h2 class="section-title" style="margin-bottom: 20px;">La communauté Forfeo en action</h2>
-                <p class="subtitle">Vos moments, vos expériences, votre impact. Merci de partager la magie !</p>
-            </div>
+            <div class="gallery-intro"><h2 class="section-title" style="margin-bottom: 20px;">La communauté Forfeo en action</h2><p class="subtitle">Vos moments, vos expériences, votre impact. Merci de partager la magie !</p></div>
             <div class="marquee-wrapper">
-                <div class="marquee">
-                    <div class="marquee-content scroll-left">
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Expérience+Spa" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Microbrasserie+Locale" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Restaurant+Chic" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Video+Témoignage" class="gallery-item" alt="Forféen Vidéo"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Glamping+&+Nature" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Expérience+Spa" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Microbrasserie+Locale" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Restaurant+Chic" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Video+Témoignage" class="gallery-item" alt="Forféen Vidéo"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Glamping+&+Nature" class="gallery-item" alt="Forféen"></a>
-                    </div>
-                </div>
-                <div class="marquee">
-                    <div class="marquee-content scroll-right">
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Festival+Local" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Sensations+Fortes" class="gallery-item" alt="Forféen Vidéo"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Escapade+Romantique" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Yoga+&+Bien-être" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/280x200/112240/64ffda?text=Atelier+Créatif" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Festival+Local" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Sensations+Fortes" class="gallery-item" alt="Forféen Vidéo"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Escapade+Romantique" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Yoga+&+Bien-être" class="gallery-item" alt="Forféen"></a>
-                        <a href="videos.html" class="gallery-link"><img src="https://placehold.co/280x200/112240/64ffda?text=Atelier+Créatif" class="gallery-item" alt="Forféen"></a>
-                    </div>
-                </div>
+                <div class="marquee"><div class="marquee-content scroll-left"><a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Expérience+Spa" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Microbrasserie+Locale" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Restaurant+Chic" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Video+Témoignage" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Glamping+&+Nature" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Expérience+Spa" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Microbrasserie+Locale" class="gallery-item"></a></div></div>
+                <div class="marquee"><div class="marquee-content scroll-right"><a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Festival+Local" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Sensations+Fortes" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/400x200/112240/64ffda?text=Escapade+Romantique" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/300x200/112240/64ffda?text=Yoga+&+Bien-être" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/280x200/112240/64ffda?text=Atelier+Créatif" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/350x200/112240/64ffda?text=Festival+Local" class="gallery-item"></a><a href="videos.html" class="gallery-link"><img src="https://placehold.co/250x200/112240/64ffda?text=Sensations+Fortes" class="gallery-item"></a></div></div>
             </div>
         </section>
+
+        <section class="map-section">
+            <h2 class="section-title">Carte de l'Impact</h2>
+            <p style="text-align: center; color: #8892b0; margin-bottom: 30px;">Découvrez les organismes communautaires que nous soutenons partout au Québec.</p>
+            <div id="map"></div>
+        </section>
+
+        <div class="chat-widget-btn" onclick="toggleChat()"><span class="chat-icon">🐶</span></div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.5em;">🐶</span><div><h4>Forfy</h4><span style="font-size:0.7em; color:#64ffda;">Assistant Dons & Impact</span></div></div><span class="close-chat" onclick="toggleChat()">✕</span></div>
+            <div class="chat-body" id="chatBody"><div class="message bot-msg">Wouf ! Je suis l'expert en dons de Forfeo. Posez-moi une question sur le 1% ou les organismes partenaires !</div></div>
+            <div class="chat-input-area"><input type="text" id="userInput" class="chat-input" placeholder="Ex: Comment voter ?" onkeypress="handleKeyPress(event)"><button class="send-btn" onclick="sendMessage()">➤</button></div>
+        </div>
 
     </main>
     
@@ -400,35 +394,112 @@
             <a href="https://www.facebook.com/share/1Ck2JnHSmf/?mibextid=wwXIfr" target="_blank" class="social-link" title="Suivez-nous sur Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
             <a href="https://www.tiktok.com/@forfeoinc?_r=1&_t=ZS-92Ir0D5AcNA" target="_blank" class="social-link" title="Suivez-nous sur TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.88-2.91 6.52-1.78 1.63-4.15 2.5-6.55 2.35-4.51-.27-8.07-4.04-8.03-8.59.04-4.54 3.73-8.24 8.28-8.24.26 0 .52.01.78.04v4.21c-.27-.02-.54-.03-.81-.03-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95c2.18 0 3.95-1.77 3.95-3.95V.02z"/></svg></a>
         </div>
-        <p>
-            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
-        </p>
+        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br><a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
     </footer>
 
     <script>
-        // DATE CIBLE : 1er Juin 2026 (Tu peux changer cette date)
+        // --- 1. COMPTEUR ---
         const targetDate = new Date("June 1, 2026 00:00:00").getTime();
-
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = targetDate - now;
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
             document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
             document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
             document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "<h3 style='color:#64ffda'>C'est parti !</h3>";
-            }
+            if (distance < 0) { clearInterval(timer); document.getElementById("countdown").innerHTML = "<h3 style='color:#64ffda'>C'est parti !</h3>"; }
         }, 1000);
+
+        // --- 2. CARTE IMPACT (Leaflet) ---
+        var map = L.map('map').setView([46.8139, -71.2080], 6); // Vue large Québec
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains: 'abcd', maxZoom: 19
+        }).addTo(map);
+
+        // Icône Coeur (Pour l'Impact Social)
+        var impactIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='font-size:20px;'>❤️</div>",
+            iconSize: [25, 25], iconAnchor: [12, 12]
+        });
+
+        // Données des Organismes (Exemples)
+        var impactPoints = [
+            { "nom": "Moisson Québec", "lat": 46.8139, "lon": -71.2080, "desc": "Banque alimentaire" },
+            { "nom": "Dans la rue", "lat": 45.5017, "lon": -73.5673, "desc": "Aide aux jeunes sans-abri" },
+            { "nom": "SPA Estrie", "lat": 45.4042, "lon": -71.8929, "desc": "Refuge animalier" },
+            { "nom": "Maison des Jeunes", "lat": 48.4284, "lon": -71.0601, "desc": "Soutien jeunesse Saguenay" }
+        ];
+
+        impactPoints.forEach(point => {
+            L.marker([point.lat, point.lon], { icon: impactIcon }).addTo(map).bindPopup(`<b style="color:#0a192f">${point.nom}</b><br>${point.desc}`);
+        });
+
+        // --- 3. IA LOCALE "FORFY EXPERT DONS" ---
+        // Base de connaissance (Cerveau du chien)
+        const knowledgeBase = [
+            { keys: ["don", "argent", "pourcentage", "1%", "sous"], resp: "Forfeo s'engage à reverser **1 % de ses bénéfices nets** directement aux organismes. C'est de l'argent frais pour leur mission !" },
+            { keys: ["organisme", "partenaire", "association", "obnl"], resp: "Nous soutenons des OBNL enregistrés au Québec (Moisson, Refuges, etc.). Voir la <a href='partenaires.html' style='color:#64ffda'>page Partenaires</a> pour s'inscrire." },
+            { keys: ["vote", "choisir", "gagner", "sélection"], resp: "Chaque mois, c'est VOUS (la communauté) qui votez pour la cause qui recevra le don. Rendez-vous sur la page <a href='vote.html' style='color:#64ffda'>Vote</a>." },
+            { keys: ["reçu", "impôt", "fiscal", "taxe"], resp: "Comme c'est Forfeo qui effectue le don corporatif à même ses profits, nous ne pouvons pas émettre de reçus fiscaux aux clients individuels." },
+            { keys: ["forfait", "achat", "prix", "acheter"], resp: "Je suis spécialisé dans les dons ! Pour acheter un forfait, visitez notre site principal <a href='https://isow.forfeo.com' target='_blank' style='color:#64ffda'>Forfeo.com</a>." },
+            { keys: ["bonjour", "salut", "allo", "hey"], resp: "Wouf ! Bonjour ! Comment puis-je vous aider concernant notre mission sociale ?" }
+        ];
+
+        function toggleChat() {
+            var chatWindow = document.getElementById('chatWindow');
+            chatWindow.style.display = (chatWindow.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
+
+        function findResponse(text) {
+            text = text.toLowerCase();
+            // Chercher une correspondance par mots-clés
+            for (let item of knowledgeBase) {
+                for (let key of item.keys) {
+                    if (text.includes(key)) return item.resp;
+                }
+            }
+            return "Je ne suis pas sûr de comprendre. Je suis un expert en **dons** et **organismes**. Essayez de reformuler ! 🐶";
+        }
+
+        function sendMessage() {
+            var input = document.getElementById('userInput');
+            var messageText = input.value.trim();
+            if (messageText === "") return;
+
+            addMessage(messageText, 'user-msg');
+            input.value = "";
+
+            // Simulation de réflexion
+            var chatBody = document.getElementById('chatBody');
+            var loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message bot-msg';
+            loadingDiv.id = 'loading';
+            loadingDiv.innerHTML = '<em>Forfy flaire la réponse... 👃</em>';
+            chatBody.appendChild(loadingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                document.getElementById('loading').remove();
+                let botResponse = findResponse(messageText);
+                addMessage(botResponse, 'bot-msg');
+            }, 800);
+        }
+
+        function addMessage(text, className) {
+            var chatBody = document.getElementById('chatBody');
+            var msgDiv = document.createElement('div');
+            msgDiv.className = 'message ' + className;
+            msgDiv.innerHTML = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
     </script>
 
 </body>
