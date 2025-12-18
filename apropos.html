@@ -17,11 +17,31 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
         h1 { color: #e6f1ff; font-size: 2.5em; text-align: center; margin-bottom: 50px; }
         .two-col { display: flex; align-items: center; gap: 50px; margin-bottom: 80px; }
+        .text-col { flex: 1; }
+        .img-col { flex: 1; }
         .img-col img { width: 100%; border-radius: 15px; border: 2px solid #64ffda; box-shadow: 0 0 20px rgba(100,255,218,0.2); }
-        .team-section { text-align: center; }
-        .team-img { width: 100%; max-width: 900px; border-radius: 15px; border: 2px solid #64ffda; }
         
-        @media (max-width: 768px) { header { flex-direction: column; } .two-col { flex-direction: column; } }
+        .team-section { text-align: center; margin-top: 80px; }
+        
+        /* STYLE DU PLACEHOLDER "PHOTO À VENIR" */
+        .photo-placeholder {
+            width: 100%;
+            max-width: 900px;
+            height: 400px;
+            margin: 0 auto;
+            border: 2px dashed #64ffda; /* Bordure pointillée verte */
+            border-radius: 15px;
+            background-color: rgba(100, 255, 218, 0.05); /* Fond vert très léger */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #8892b0;
+        }
+        .placeholder-icon { font-size: 3em; margin-bottom: 15px; opacity: 0.7; }
+        .placeholder-text { font-size: 1.2em; font-weight: bold; letter-spacing: 1px; color: #64ffda; }
+
+        @media (max-width: 768px) { header { flex-direction: column; } .two-col { flex-direction: column; } .photo-placeholder { height: 250px; } }
     </style>
 </head>
 <body>
@@ -55,8 +75,14 @@
 
         <div class="team-section">
             <h2 style="color:#e6f1ff; margin-bottom:30px;">L'équipe derrière le mouvement</h2>
-            <img src="images 1 Forfeo Bureau.jpg" alt="Équipe Forfeo" class="team-img">
-            <p style="color:#64ffda; margin-top:10px;">L'équipe Forfeo unie pour un Québec solidaire.</p>
+            
+            <div class="photo-placeholder">
+                <span class="placeholder-icon">📸</span>
+                <span class="placeholder-text">PHOTO OFFICIELLE À VENIR</span>
+                <p style="font-size:0.9em; margin-top:10px;">L'équipe se fait une beauté pour vous !</p>
+            </div>
+
+            <p style="color:#64ffda; margin-top:20px;">L'équipe Forfeo unie pour un Québec solidaire.</p>
         </div>
     </div>
 
