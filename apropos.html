@@ -3,31 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À Propos - Forfeo</title>
+    <title>À Propos de Nous - Forfeo</title>
+    
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; }
-        .logo-img { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+        /* --- 1. CONFIGURATION GÉNÉRALE (Même base que index.html) --- */
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- 2. HEADER & NAVIGATION --- */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; }
+        .logo-img { height: 50px; width: auto; }
         nav { display: flex; gap: 20px; align-items: center; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95em; }
         nav a:hover { color: #64ffda; }
-        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
-        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
-        .container { max-width: 900px; margin: 60px auto; padding: 20px; }
-        h1 { text-align: center; font-size: 2.5em; color: #e6f1ff; margin-bottom: 40px; }
-        .about-section { display: flex; align-items: center; gap: 40px; margin-bottom: 60px; flex-wrap: wrap; }
-        .about-text { flex: 1; }
-        .about-img { flex: 1; min-width: 300px; background-color: #112240; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px dashed #64ffda; color: #64ffda; font-size: 1.2em; }
-        h2 { color: #64ffda; }
-        .highlight { color: #e6f1ff; font-weight: bold; }
-        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; margin-top: 50px; }
+        /* Lien actif pour la page actuelle */
+        nav a.active { color: #64ffda; border-bottom: 1px solid #64ffda; }
+        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; border-bottom: 1px solid #64ffda !important; }
+
+        /* --- 3. HERO À PROPOS --- */
+        .about-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #0a192f, #0d1f3a);
+            border-bottom: 1px solid #1f2f4d;
+        }
+        h1 { font-size: 3em; color: #e6f1ff; margin-bottom: 20px; }
+        .highlight { background: linear-gradient(to right, #64ffda, #00bcd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.2em; max-width: 700px; margin: 0 auto; color: #8892b0; }
+
+        /* --- 4. SECTIONS DE CONTENU --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        h2 { color: #e6f1ff; font-size: 2.2em; margin-bottom: 30px; position: relative; display: inline-block; }
+        h2::after { content: ''; display: block; width: 50%; height: 3px; background: #64ffda; margin-top: 10px; }
+
+        /* Mise en page 2 colonnes (Texte + Image Engagement) */
+        .two-col-layout { display: flex; align-items: center; gap: 50px; }
+        .text-col { flex: 1; }
+        .img-col { flex: 1; }
+        
+        /* Style des images */
+        .about-img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            /* Effet de lueur néon subtil */
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .about-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+        }
+
+        /* Section Équipe (Image large) */
+        .team-section { background-color: #0d1f3a; text-align: center; }
+        .team-section h2::after { margin: 10px auto 0 auto; } /* Centrer la ligne sous le titre */
+        .section-intro { max-width: 700px; margin: 0 auto 40px auto; color: #8892b0; }
+        
+        .team-photo-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .team-img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            display: block;
+        }
+        .photo-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #64ffda;
+            font-size: 0.9em;
+        }
+
+        /* --- 5. FOOTER --- */
+        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; background-color: #0a192f; border-top: 1px solid #1f2f4d; }
+
+        /* MOBILE */
+        @media only screen and (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 10px; }
+            nav { flex-wrap: wrap; justify-content: center; }
+            .two-col-layout { flex-direction: column; gap: 30px; }
+            .img-col { order: -1; /* L'image au-dessus du texte sur mobile */ }
+            h1 { font-size: 2.5em; }
+            .section { padding: 50px 0; }
+        }
     </style>
 </head>
+
 <body>
+
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
-            <a href="apropos.html">À Propos</a>
+            <a href="apropos.html" class="active">À Propos</a>
             <a href="causes.html">Causes</a>
             <a href="index.html#concours">Concours</a>
             <a href="faq.html">Aide</a>
@@ -36,28 +120,55 @@
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
-    <main class="container">
-        <h1>L'histoire de Forfeo</h1>
-        <div class="about-section">
-            <div class="about-text">
-                <h2>Notre Mission</h2>
-                <p>Forfeo est né d'une idée simple : <span class="highlight">transformer chaque achat plaisir en un geste solidaire.</span></p>
-                <p>Nous voulions créer une plateforme où les Québécois peuvent découvrir des expériences locales incroyables (restaurants, activités, détente) tout en sachant qu'ils contribuent concrètement à leur communauté.</p>
+
+    <main>
+        <section class="about-hero">
+            <h1>Plus qu'une plateforme,<br>un <span class="highlight">mouvement local</span>.</h1>
+            <p class="subtitle">Découvrez l'histoire de Forfeo, notre mission et les visages qui travaillent chaque jour pour reconnecter le commerce local à l'entraide communautaire.</p>
+        </section>
+
+        <section class="section">
+            <div class="container two-col-layout">
+                <div class="text-col">
+                    <h2>Notre Mission : Cultiver l'entraide</h2>
+                    <p>Chez Forfeo, nous croyons que chaque transaction peut être un acte de solidarité. Notre mission est simple mais ambitieuse : transformer le pouvoir d'achat local en un moteur de changement social durable.</p>
+                    <p>Nous ne sommes pas juste une billetterie. Nous sommes un pont entre les Québécois qui veulent vivre des expériences uniques et les organismes qui tissent le filet social de notre province.</p>
+                    <p>Cette image symbolise notre engagement : prendre soin de ce qui est précieux, faire grandir les initiatives locales et assurer un avenir plus vert et plus solidaire, une "pousse" à la fois.</p>
+                </div>
+                <div class="img-col">
+                    <img src="image_0.png" alt="Mains tenant une jeune pousse, symbole de l'engagement durable de Forfeo" class="about-img">
+                </div>
             </div>
-            <div class="about-img">📷 Photo Équipe / Bureau</div>
-        </div>
-        <div class="about-section" style="flex-direction: row-reverse;">
-            <div class="about-text">
-                <h2>Pourquoi le "Double Impact" ?</h2>
-                <p>Nous croyons que le commerce local et l'entraide sociale doivent marcher main dans la main.</p>
-                <p>En reversant <strong>1 % de nos bénéfices</strong> à même nos résultats, nous prouvons qu'une entreprise peut être rentable tout en ayant un cœur. Pas de dons complexes, juste un engagement clair et transparent.</p>
+        </section>
+
+        <section class="section team-section">
+            <div class="container">
+                <h2>L'équipe derrière le mouvement</h2>
+                <p class="section-intro">Forfeo, c'est avant tout des passionnés de technologie, d'entrepreneuriat et d'impact social, unis par la volonté de faire une différence au Québec.</p>
+                
+                <div class="team-photo-wrapper">
+                    <img src="image_1.png" alt="Photo de l'équipe Forfeo réunie" class="team-img">
+                    <p class="photo-caption">L'équipe Forfeo, unie et déterminée à bâtir un Québec plus solidaire.</p>
+                </div>
             </div>
-             <div class="about-img">🤝 Photo Engagement</div>
-        </div>
+        </section>
+
+        <section class="section" style="text-align: center;">
+            <div class="container">
+                <h3 style="color: #e6f1ff; font-size: 1.8em; margin-bottom: 20px;">Envie de faire partie de l'histoire ?</h3>
+                <p style="color: #8892b0; max-width: 600px; margin: 0 auto 30px auto;">Que vous soyez un utilisateur, une entreprise ou un organisme, votre place est parmi nous.</p>
+                <a href="index.html" class="btn-connexion" style="background-color: #64ffda; color: #0a192f !important; font-weight: bold; text-decoration: none; display: inline-block;">Retour à l'accueil pour participer</a>
+            </div>
+        </section>
+
     </main>
+    
     <footer>
-        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
+        <p>
+            &copy; 2025 Forfeo. Fait avec passion au Québec.<br>
+            <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a>
+        </p>
     </footer>
+
 </body>
 </html>
