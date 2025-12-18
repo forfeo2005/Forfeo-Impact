@@ -3,104 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Partenaires & Organismes - Forfeo</title>
-    
+    <title>Espace Organismes - Forfeo</title>
     <style>
-        /* --- CONFIGURATION GÉNÉRALE --- */
-        html { scroll-behavior: smooth; }
-        * { box-sizing: border-box; }
-        
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; overflow-x: hidden; }
-        
-        /* HEADER */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); border-bottom: 1px solid #1f2f4d; position: sticky; top: 0; z-index: 1000; }
-        .logo-img { height: 50px; width: auto; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a192f; color: #ccd6f6; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; }
+        .logo-img { height: 50px; }
         nav { display: flex; gap: 20px; align-items: center; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95em; }
+        nav a { color: #a8b2d1; text-decoration: none; }
         nav a:hover { color: #64ffda; }
-        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; transition: background-color 0.3s; }
-        .btn-connexion:hover { background-color: rgba(100, 255, 218, 0.1); }
-
-        /* HERO B2B */
-        .hero-b2b { text-align: center; padding: 100px 20px; max-width: 900px; margin: 0 auto; border-bottom: 1px solid #1f2f4d; }
-        .badge-dev { background-color: rgba(100, 255, 218, 0.1); color: #64ffda; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; font-weight: bold; border: 1px solid #64ffda; display: inline-block; margin-bottom: 20px; }
-        h1 { font-size: 3em; color: #e6f1ff; margin-bottom: 20px; line-height: 1.2; }
-        .subtitle { font-size: 1.2em; color: #8892b0; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .btn-cta { background-color: #64ffda; color: #0a192f; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 5px; transition: transform 0.2s; display: inline-block; }
-        .btn-cta:hover { transform: translateY(-3px); background-color: #4cdbb3; }
-
-        /* SECTIONS */
-        .section-container { max-width: 1000px; margin: 0 auto; padding: 80px 20px; }
-        h2 { color: #e6f1ff; font-size: 2em; text-align: center; margin-bottom: 50px; position: relative; }
-        h2::after { content: ""; display: block; width: 60px; height: 3px; background-color: #64ffda; margin: 15px auto 0; }
-
-        /* CRITÈRES D'ADMISSIBILITÉ (CHECKLIST) */
-        .eligibility-box { background-color: #112240; border: 1px solid #233554; border-radius: 10px; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
-        .eligibility-text { flex: 1; min-width: 300px; }
-        .eligibility-list { flex: 1; min-width: 300px; }
-        .check-item { display: flex; align-items: center; margin-bottom: 15px; color: #a8b2d1; }
-        .check-icon { color: #64ffda; font-weight: bold; margin-right: 15px; font-size: 1.2em; }
-
-        /* VISIBILITÉ (Why join) */
-        .value-grid { display: flex; gap: 30px; margin-top: 50px; flex-wrap: wrap; }
-        .value-card { flex: 1; min-width: 250px; text-align: center; padding: 20px; background: rgba(17, 34, 64, 0.3); border-radius: 10px; border: 1px solid transparent; transition: border-color 0.3s; }
-        .value-card:hover { border-color: rgba(100, 255, 218, 0.3); }
-        .value-icon { font-size: 2.5em; margin-bottom: 15px; display: block; }
-        .value-card h3 { color: #e6f1ff; margin-bottom: 10px; }
-
-        /* PROCESSUS */
-        .process-steps { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; text-align: center; margin-top: 40px; }
-        .step { flex: 1; min-width: 200px; padding: 20px; background: rgba(17, 34, 64, 0.5); border-radius: 10px; position: relative; }
-        .step-number { font-size: 2.5em; font-weight: bold; color: #64ffda; display: block; margin-bottom: 10px; opacity: 0.5; }
-        .step h4 { color: #e6f1ff; margin-bottom: 10px; }
-
-        /* NOUVEAU : Animation du lien flash */
-        .flash-link {
-            color: #64ffda; text-decoration: none; font-weight: bold;
-            animation: flashPulse 2s infinite; /* Le lien clignote */
-            display: inline-block; padding: 2px 8px; border-radius: 4px;
-            border: 1px solid rgba(100, 255, 218, 0.3);
-        }
-        @keyframes flashPulse {
-             0% { background-color: rgba(100, 255, 218, 0); box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); color: #64ffda; }
-             50% { background-color: rgba(100, 255, 218, 0.2); box-shadow: 0 0 15px rgba(100, 255, 218, 0.5); color: #ffffff; border-color: #64ffda; }
-             100% { background-color: rgba(100, 255, 218, 0); box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); color: #64ffda; }
-        }
-        .flash-link:hover { animation: none; background-color: #64ffda; color: #0a192f; }
-
-        /* FORMULAIRE */
-        .form-box { background-color: #112240; padding: 40px; border-radius: 10px; border: 1px solid #64ffda; max-width: 700px; margin: 0 auto; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
-        label { display: block; color: #64ffda; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; margin-top: 20px; }
-        input, textarea, select { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #233554; background-color: #0a192f; color: #ccd6f6; box-sizing: border-box; font-family: inherit; }
-        .btn-submit { width: 100%; padding: 15px; background-color: #64ffda; color: #0a192f; border: none; border-radius: 5px; font-weight: bold; font-size: 1.1em; cursor: pointer; margin-top: 30px; transition: background-color 0.3s, transform 0.2s; }
-        .btn-submit:hover { background-color: #4cdbb3; transform: translateY(-2px); }
-        .data-pledge { font-size: 0.8em; color: #8892b0; margin-top: 20px; padding: 10px; background: rgba(10, 25, 47, 0.5); border-radius: 5px; border-left: 3px solid #64ffda; display: flex; align-items: center; gap: 10px; }
-
-        /* FAQ */
-        details { background-color: #112240; margin-bottom: 15px; border-radius: 5px; border: 1px solid #233554; transition: border-color 0.3s; }
-        details:hover { border-color: #64ffda; }
-        summary { padding: 15px; cursor: pointer; font-weight: bold; color: #e6f1ff; list-style: none; }
-        summary:hover { color: #64ffda; }
-        .faq-text { padding: 15px; border-top: 1px solid #233554; color: #a8b2d1; font-size: 0.95em; }
-
-        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #8892b0; border-top: 1px solid #1f2f4d; background-color: #0a192f; }
-
-        /* MOBILE */
-        @media only screen and (max-width: 768px) {
-            header { flex-direction: column; padding: 15px 10px; }
-            .logo-img { margin-bottom: 15px; }
-            nav { flex-wrap: wrap; justify-content: center; gap: 15px 10px; width: 100%; }
-            h1 { font-size: 2.2em; }
-            .section-container { padding: 40px 20px; }
-            .eligibility-box { flex-direction: column; gap: 20px; padding: 20px; }
-            .form-box { padding: 20px; }
-            .btn-submit { width: 100%; }
-            .value-grid { flex-direction: column; gap: 40px; }
-            .step { min-width: 100%; }
-        }
+        .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .form-box { background: #112240; padding: 40px; border-radius: 10px; border: 1px solid #64ffda; }
+        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 20px; background: #0a192f; border: 1px solid #233554; color: #fff; border-radius: 5px; }
+        label { display: block; color: #64ffda; margin-bottom: 5px; font-weight: bold; }
+        .btn-submit { width: 100%; padding: 15px; background: #64ffda; color: #0a192f; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        
+        @media (max-width: 768px) { header { flex-direction: column; } nav { flex-wrap: wrap; justify-content: center; } }
     </style>
 </head>
 <body>
+
     <header>
         <a href="index.html"><img src="logo.png" alt="Logo Forfeo" class="logo-img"></a>
         <nav>
@@ -108,156 +31,48 @@
             <a href="causes.html">Causes</a>
             <a href="index.html#concours">Concours</a>
             <a href="faq.html">Aide</a>
-            <a href="partenaires.html" style="color: #64ffda; border-bottom: 1px solid #64ffda;">Espace Organismes</a>
+            <a href="partenaires.html" style="color:#64ffda;">Espace Organismes</a>
+            <a href="inscription.html">Participer</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
 
-    <main>
-        <section class="hero-b2b">
-            <span class="badge-dev">🚀 Projet en phase de pré-lancement</span>
-            <h1>Le financement participatif,<br>sans l'effort.</h1>
-            <p class="subtitle">Forfeo transforme l'achat local en levier financier pour votre cause. Pas de billets à vendre, pas d'événements à organiser. Juste du soutien.</p>
-            <a href="#manifestation" class="btn-cta">Rejoindre le mouvement</a>
-        </section>
+    <div class="container">
+        <h1 style="text-align:center; color:#e6f1ff;">Devenir partenaire bénéficiaire</h1>
+        <p style="text-align:center; margin-bottom:40px;">Inscrivez votre organisme pour être éligible aux dons générés par la communauté Forfeo.</p>
+        
+        <div class="form-box">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
+                <input type="hidden" name="subject" value="Nouvel Organisme Partenaire">
+                <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci.html">
 
-        <section class="section-container">
-            <h2>Êtes-vous admissible ?</h2>
-            <div class="eligibility-box">
-                <div class="eligibility-text">
-                    <h3 style="color:#e6f1ff; margin-top:0;">Nous recherchons des partenaires sérieux.</h3>
-                    <p style="color:#8892b0;">Pour assurer la confiance de nos clients et la légitimité des votes, nous avons établi des critères simples mais stricts.</p>
-                </div>
-                <div class="eligibility-list">
-                    <div class="check-item"><span class="check-icon">✓</span> OBNL enregistré au Québec (NEQ valide)</div>
-                    <div class="check-item"><span class="check-icon">✓</span> Mission apolitique et non religieuse</div>
-                    <div class="check-item"><span class="check-icon">✓</span> Impact local direct (pas d'intermédiaires)</div>
-                    <div class="check-item"><span class="check-icon">✓</span> Capacité à fournir un logo et une description</div>
-                </div>
-            </div>
-        </section>
+                <label>Nom de l'organisme</label>
+                <input type="text" name="org_name" required>
 
-        <section class="section-container">
-            <h2>Pourquoi s'inscrire maintenant ?</h2>
-            <div class="value-grid">
-                <div class="value-card">
-                    <span class="value-icon">📢</span>
-                    <h3>Visibilité Gratuite</h3>
-                    <p style="color:#8892b0; font-size:0.9em;">Même si vous ne remportez pas le vote du mois, votre logo et votre mission sont exposés à des milliers de visiteurs québécois sur notre plateforme de vote.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">⚖️</span>
-                    <h3>Rotation Équitable</h3>
-                    <p style="color:#8892b0; font-size:0.9em;">Pas de "concours de popularité" injuste. Nous sélectionnons des cohortes thématiques (ex: Mois de l'Environnement) pour que les petits organismes aient une chance réelle face aux gros.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">💸</span>
-                    <h3>Financement Libre</h3>
-                    <p style="color:#8892b0; font-size:0.9em;">Engagement ferme : <strong>Forfeo reverse 1 % de ses propres bénéfices nets</strong> aux causes participantes. Ce sont des fonds flexibles (non affectés) pour votre mission.</p>
-                </div>
-            </div>
-        </section>
+                <label>Secteur d'activité</label>
+                <select name="sector">
+                    <option>Lutte contre la pauvreté</option>
+                    <option>Santé</option>
+                    <option>Éducation</option>
+                    <option>Environnement</option>
+                    <option>Animaux</option>
+                </select>
 
-        <section class="section-container" style="background-color: #0d1f3a; border-radius: 15px;">
-            <h2>Le modèle en développement</h2>
-            <p style="text-align: center; color: #a8b2d1; max-width: 700px; margin: 0 auto;">Voici comment nous envisageons le cycle de don.</p>
-            <div class="process-steps">
-                <div class="step">
-                    <span class="step-number">01</span>
-                    <h4>Achat Local</h4>
-                    <p style="font-size: 0.9em; color:#8892b0;">Ventes de forfaits sur <a href="https://forfeo.com" target="_blank" class="flash-link">Forfeo.com</a></p>
-                </div>
-                <div class="step">
-                    <span class="step-number">02</span>
-                    <h4>Cagnotte</h4>
-                    <p style="font-size: 0.9em; color:#8892b0;">Accumulation du 1 % des bénéfices.</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">03</span>
-                    <h4>Vote Citoyen</h4>
-                    <p style="font-size: 0.9em; color:#8892b0;">La communauté choisit la cause du mois.</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">04</span>
-                    <h4>Versement</h4>
-                    <p style="font-size: 0.9em; color:#8892b0;">Envoi des fonds à l'organisme gagnant.</p>
-                </div>
-            </div>
-        </section>
+                <label>Personne contact</label>
+                <input type="text" name="contact_name" required>
 
-        <section class="section-container">
-            <h2>Questions Fréquentes</h2>
-            <details>
-                <summary>Est-ce qu'il y a des frais pour s'inscrire ?</summary>
-                <div class="faq-text">Absolument aucun. Forfeo ne demandera jamais d'argent aux organismes.</div>
-            </details>
-            <details>
-                <summary>Comment fonctionne la sélection pour le vote ?</summary>
-                <div class="faq-text">Notre comité d'éthique sélectionne 3 à 5 organismes par mois basés sur une thématique (ex: Rentrée scolaire, Froid hivernal, etc.) pour assurer une cohérence.</div>
-            </details>
-            <details>
-                <summary>Quand le financement débutera-t-il ?</summary>
-                <div class="faq-text">Le projet est en phase de pré-lancement (voir le compteur sur l'accueil). Nous constituons notre banque de partenaires maintenant pour être prêts au jour J.</div>
-            </details>
-        </section>
+                <label>Courriel</label>
+                <input type="email" name="email" required>
 
-        <section id="manifestation" class="section-container">
-            <div class="form-box">
-                <h2 style="margin-bottom: 10px;">Devenir partenaire potentiel</h2>
-                <p style="text-align:center; color:#a8b2d1; margin-bottom:30px;">Remplissez ce formulaire pour entrer dans notre base de données. C'est sans engagement.</p>
-                
-                <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="c7c665be-ec7f-4455-9a5e-11ebb323fff9">
-                    <input type="hidden" name="subject" value="Nouvelle manifestation d'intérêt ORGANISME">
-                    <input type="hidden" name="from_name" value="Site Forfeo Partenaires">
-                    <input type="hidden" name="redirect" value="https://forfeo2005.github.io/FORFEO-DON-COMUNAUTAIRE/merci-contact.html">
+                <label>Message (Facultatif)</label>
+                <textarea name="message" rows="4"></textarea>
 
-                    <label for="org_name">Nom de l'organisme</label>
-                    <input type="text" name="org_name" id="org_name" required placeholder="Ex: Moisson Québec">
+                <button type="submit" class="btn-submit">Envoyer ma candidature</button>
+            </form>
+        </div>
+    </div>
 
-                    <label for="sector">Secteur d'activité</label>
-                    <select name="sector" id="sector">
-                        <option value="Pauvreté">Lutte contre la pauvreté</option>
-                        <option value="Santé">Santé & Recherche</option>
-                        <option value="Éducation">Éducation & Jeunesse</option>
-                        <option value="Environnement">Environnement</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-
-                    <label for="region">Région administrative</label>
-                    <input type="text" name="region" id="region" required placeholder="Ex: Capitale-Nationale, Montréal...">
-
-                    <label for="contact_name">Personne contact</label>
-                    <input type="text" name="contact_name" id="contact_name" required>
-
-                    <div style="display:flex; gap:20px; flex-wrap: wrap;">
-                        <div style="flex:1; min-width: 200px;">
-                            <label for="email">Courriel professionnel</label>
-                            <input type="email" name="email" id="email" required>
-                        </div>
-                        <div style="flex:1; min-width: 200px;">
-                            <label for="phone">Téléphone</label>
-                            <input type="tel" name="phone" id="phone" placeholder="Ex: 514 123-4567">
-                        </div>
-                    </div>
-
-                    <label for="message">Message (Facultatif)</label>
-                    <textarea name="message" id="message" rows="4" placeholder="Parlez-nous brièvement de votre mission..."></textarea>
-                    
-                    <div class="data-pledge">
-                        <span style="font-size: 1.5em;">🛡️</span>
-                        <div><strong>Engagement éthique :</strong> Les données de vos donateurs potentiels ne sont jamais partagées, vendues ou utilisées à d'autres fins que le vote Forfeo.</div>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Envoyer notre manifestation d'intérêt</button>
-                    <p style="text-align:center; font-size:0.8em; color:#8892b0; margin-top:15px;">En cliquant, vous acceptez d'être contacté par l'équipe de développement de Forfeo.</p>
-                </form>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Forfeo. Fait avec passion au Québec.<br>
-        <a href="confidentialite.html" style="color: #64ffda; text-decoration: none; font-size: 0.9em;">Politique de confidentialité & Conditions</a></p>
-    </footer>
+    <script src="forfy.js"></script>
 </body>
 </html>
