@@ -31,7 +31,7 @@
         .logo-img { height: 50px; transition: transform 0.3s; }
         .logo-img:hover { transform: scale(1.05); }
         nav { display: flex; gap: 20px; align-items: center; }
-        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav a { color: #a8b2d1; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95em; }
         nav a:hover { color: #64ffda; }
         .btn-connexion { border: 1px solid #64ffda; color: #64ffda !important; padding: 8px 20px; border-radius: 4px; }
 
@@ -48,6 +48,7 @@
         .btn { padding: 15px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 1em; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
         .btn-principal { background-color: #64ffda; color: #0a192f; }
         .btn-secondaire { border: 2px solid #64ffda; color: #64ffda; }
+        /* Nouveau bouton shop */
         .btn-shop { background: linear-gradient(135deg, #00bcd4, #64ffda); color: #0a192f; border: none; box-shadow: 0 0 15px rgba(100, 255, 218, 0.4); transition: transform 0.2s; }
         .btn-shop:hover { transform: scale(1.05); }
         
@@ -155,8 +156,9 @@
         <nav>
             <a href="apropos.html">À Propos</a>
             <a href="causes.html">Causes</a>
+            <a href="#comment-ca-marche">Comment ça marche</a>
             <a href="vote.html">Vote</a>
-            <a href="partenaires.html">Organismes</a>
+            <a href="partenaires.html">Espace Organismes</a>
             <a href="connexion.html" class="btn-connexion">Connexion</a>
         </nav>
     </header>
@@ -169,7 +171,7 @@
             <p class="subtitle">Chez Forfeo, chaque expérience que vous vivez contribue directement à soutenir les communautés du Québec.</p>
             <div class="boutons">
                 <a href="causes.html" class="btn btn-principal">Découvrir les causes</a>
-                <a href="vote.html" class="btn-vote-anime">🗳️ Voter pour la cause du mois</a>
+                <a href="vote.html" class="btn btn-vote-anime">🗳️ Voter pour la cause du mois</a>
                 <a href="https://isow.forfeo.com/giftcards" class="btn btn-shop" target="_blank">🎁 Offrir un forfait</a>
             </div>
         </section>
@@ -195,7 +197,7 @@
                 <div class="flex-item">
                     <span class="step-icon">🎯</span>
                     <h3 style="color: #e6f1ff;">1. Choisissez</h3>
-                    <p style="color: #a8b2d1;">Achetez votre forfait sur notre site.</p>
+                    <p style="color: #a8b2d1;">Achetez votre forfait sur notre boutique.</p>
                     <a href="https://isow.forfeo.com/giftcards" target="_blank" class="btn-step-link">Visiter Forfeo.com</a>
                 </div>
                 
@@ -307,7 +309,9 @@
                     <button class="map-btn" onclick="searchMap()">Chercher</button>
                 </div>
             </div>
-            <div id="map"></div>
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
         </section>
 
     </main>
@@ -335,12 +339,12 @@
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
         var pinIcon = L.divIcon({ className: 'custom-pin-container', html: "<div class='custom-pin'></div>", iconSize: [30, 42], iconAnchor: [15, 42], popupAnchor: [0, -40] });
 
-        // Données génériques (Noms d'organismes fictifs/types pour le pré-lancement)
+        // Données génériques (Noms d'organismes ANONYMES)
         var impactPoints = [
-            { "nom": "Banque Alimentaire (Capitale-Nationale)", "lat": 46.8139, "lon": -71.2080, "desc": "Lutte contre la faim.", "url": "#" },
+            { "nom": "Partenaire Alimentaire (Québec)", "lat": 46.8139, "lon": -71.2080, "desc": "Lutte contre la faim.", "url": "#" },
             { "nom": "Aide Jeunesse (Montréal)", "lat": 45.5186, "lon": -73.5540, "desc": "Soutien aux jeunes.", "url": "#" },
             { "nom": "Refuge Animalier (Estrie)", "lat": 45.4042, "lon": -71.8929, "desc": "Protection animale.", "url": "#" },
-            { "nom": "Soutien Alimentaire (Montréal)", "lat": 45.5017, "lon": -73.5673, "desc": "Aide alimentaire.", "url": "#" },
+            { "nom": "Banque Alimentaire (Montréal)", "lat": 45.5017, "lon": -73.5673, "desc": "Aide alimentaire.", "url": "#" },
             { "nom": "Centre Femmes (Charlevoix)", "lat": 47.6259, "lon": -70.3622, "desc": "Soutien femmes.", "url": "#" },
             { "nom": "Aide Régionale (Bas-St-Laurent)", "lat": 48.4398, "lon": -68.5234, "desc": "Aide alimentaire.", "url": "#" }
         ];
