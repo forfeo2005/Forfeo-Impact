@@ -23,6 +23,13 @@
         .reassurance-box { background: rgba(100, 255, 218, 0.05); padding: 30px; border-radius: 10px; border: 1px solid #64ffda; text-align: center; margin-bottom: 40px; }
         .reassurance-box p { font-size: 1.1em; color: #e6f1ff; }
 
+        /* BOX STATISTIQUES (CONSERVÉ) */
+        .stats-context { background: rgba(100, 255, 218, 0.05); padding: 30px; border-radius: 10px; margin-bottom: 50px; border: 1px solid #233554; }
+        .stats-grid { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-item { flex: 1; min-width: 200px; text-align: center; }
+        .stat-number { font-size: 2.5em; font-weight: bold; color: #64ffda; display: block; }
+        .stat-desc { font-size: 0.9em; color: #a8b2d1; }
+
         /* FAQ CLIGNOTANTE */
         @keyframes flashBorder { 0% { border-color: #64ffda; } 50% { border-color: #fff; box-shadow: 0 0 15px rgba(100,255,218,0.5); } 100% { border-color: #64ffda; } }
         .flash-faq { border: 2px solid #64ffda; animation: flashBorder 2s infinite; margin-top: 40px; background: #112240; border-radius: 10px; overflow: hidden; }
@@ -62,6 +69,24 @@
         
         <div class="reassurance-box">
             <p>Rejoindre Forfeo, c'est simple et sans risque. Pas de paperasse administrative complexe. Une fois inscrit, vous profitez non seulement du vote du mois, mais aussi d'une vitrine permanente auprès de notre communauté engagée. Nous mettons votre cause en lumière.</p>
+        </div>
+
+        <div class="stats-context">
+            <h3 style="color:#e6f1ff; text-align:center; margin-top:0;">Pourquoi Forfeo s'engage ?</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">1/10</span>
+                    <span class="stat-desc">Québécois a recours à l'aide alimentaire.</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">28 000+</span>
+                    <span class="stat-desc">Animaux abandonnés chaque année au QC.</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-desc">Des dons Forfeo restent dans la province.</span>
+                </div>
+            </div>
         </div>
 
         <details class="flash-faq">
