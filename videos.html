@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vidéos & Expériences - Forfeo</title>
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a192f; color: #ccd6f6; line-height: 1.6; overflow-x: hidden; }
+        
         header { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: rgba(10, 25, 47, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f2f4d; }
         .logo-img { height: 50px; }
         nav { display: flex; gap: 20px; align-items: center; }
@@ -16,9 +17,44 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; }
         h1 { color: #e6f1ff; font-size: 2.5em; }
         
-        /* GALERIE */
-        .gallery-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 60px; }
-        .video-item { width: 300px; background: #112240; padding: 10px; border-radius: 10px; border: 1px solid #233554; }
+        /* --- STYLE DU CARROUSEL DÉFILANT --- */
+        .marquee-wrapper { 
+            overflow: hidden; 
+            margin-top: 40px; 
+            margin-bottom: 60px; 
+            width: 100%;
+            position: relative;
+        }
+        /* Dégradé sur les côtés pour adoucir le défilement */
+        .marquee-wrapper::before, .marquee-wrapper::after {
+            content: ""; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+        }
+        .marquee-wrapper::before { left: 0; background: linear-gradient(to right, #0a192f, transparent); }
+        .marquee-wrapper::after { right: 0; background: linear-gradient(to left, #0a192f, transparent); }
+
+        .marquee-content { 
+            display: flex; 
+            gap: 30px; 
+            animation: scroll 30s linear infinite; 
+            width: max-content; /* Important pour que ça ne s'écrase pas */
+        }
+        /* Animation fluide */
+        @keyframes scroll { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+        /* Pause au survol */
+        .marquee-content:hover { animation-play-state: paused; }
+
+        .video-item { 
+            min-width: 300px; /* Taille fixe pour ne pas s'écraser */
+            background: #112240; 
+            padding: 10px; 
+            border-radius: 10px; 
+            border: 1px solid #233554; 
+            transition: transform 0.3s;
+        }
+        .video-item:hover { transform: scale(1.05); border-color: #64ffda; }
         .video-thumb { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
         .video-item p { font-weight: bold; color: #e6f1ff; margin-top: 10px; }
         
@@ -33,6 +69,8 @@
         .social-links { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; }
         .social-link svg { width: 24px; height: 24px; fill: #64ffda; transition: transform 0.3s; }
         .social-link:hover svg { transform: translateY(-5px); fill: #fff; }
+        
+        @media (max-width: 768px) { header { flex-direction: column; } nav { flex-wrap: wrap; justify-content: center; } }
     </style>
 </head>
 <body>
@@ -53,10 +91,18 @@
         <h1>Galerie des Forféens</h1>
         <p>Découvrez les expériences vécues grâce à Forfeo.</p>
 
-        <div class="gallery-grid">
-            <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Spa" class="video-thumb"><p>Détente au Spa</p></div>
-            <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Nature" class="video-thumb"><p>Randonnée boréale</p></div>
-            <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Resto" class="video-thumb"><p>Souper gastronomique</p></div>
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Spa" class="video-thumb"><p>Détente au Spa</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Nature" class="video-thumb"><p>Randonnée boréale</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Resto" class="video-thumb"><p>Souper gastronomique</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Hotel" class="video-thumb"><p>Nuitée de Luxe</p></div>
+                
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Spa" class="video-thumb"><p>Détente au Spa</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Nature" class="video-thumb"><p>Randonnée boréale</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Resto" class="video-thumb"><p>Souper gastronomique</p></div>
+                <div class="video-item"><img src="https://placehold.co/300x180/112240/64ffda?text=Hotel" class="video-thumb"><p>Nuitée de Luxe</p></div>
+            </div>
         </div>
 
         <div class="tutorial-box">
@@ -70,7 +116,7 @@
                 <div class="tuto-step">
                     <span class="step-num">2</span>
                     <h4 style="color:#fff;">Envoyez</h4>
-                    <p class="step-desc">Envoyez le fichier via <b>WeTransfer</b> à <a href="mailto:videos@forfeo.com" style="color:#64ffda">videos@forfeo.com</a> ou taguez <b>#Forfeo</b> sur TikTok.</p>
+                    <p class="step-desc">Envoyez le fichier via <b>WeTransfer</b> à <a href="mailto:client@forfeo.com" style="color:#64ffda">client@forfeo.com</a> ou taguez <b>#Forfeo</b> sur TikTok.</p>
                 </div>
                 <div class="tuto-step">
                     <span class="step-num">3</span>
