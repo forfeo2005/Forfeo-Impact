@@ -1,38 +1,46 @@
-/* * CERVEAU DE FORFY 🐶 (Version Réparée avec Bulle et Image MP4)
+/* * CERVEAU DE FORFY 🐶 (Version Vidéo MP4 Corrigée)
  */
 
-// 1. CONFIGURATION ET STYLE
-// Note importante : L'utilisation d'un fichier .MP4 dans une balise <img> n'est pas standard. 
-// Si l'image ne s'affiche pas, il faudra convertir votre fichier en .GIF ou .WEBP.
-const forfyImageSource = "GifForfy.MP4"; 
+// 1. CONFIGURATION
+// Nom exact du fichier tel qu'il apparaît dans votre GitHub (Sensible aux majuscules !)
+const forfyVideoSource = "GifForfy.MP4"; 
 
+// 2. STYLE CSS
 const forfyStyles = `
     #forfy-widget {
         position: fixed; bottom: 20px; right: 20px; z-index: 9999;
         font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: flex-end;
     }
-    /* LA BULLE DE MESSAGE AU-DESSUS DE LA TÊTE */
+    
+    /* LA BULLE DE MESSAGE */
     #forfy-bubble {
         background: #64ffda; color: #0a192f;
         padding: 12px 20px; border-radius: 20px 20px 5px 20px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         font-weight: bold; white-space: nowrap;
-        margin-bottom: 10px; /* Espace entre la bulle et la tête */
-        display: none; /* Caché par défaut, affiché par le JS */
+        margin-bottom: 10px;
+        display: none;
         animation: popIn 0.5s ease-out;
     }
     @keyframes popIn { from { opacity: 0; transform: translateY(20px) scale(0.8); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-    /* L'ICÔNE (LA TÊTE) */
+    /* L'ICÔNE (Le Cercle) */
     #forfy-icon {
         width: 70px; height: 70px; border-radius: 50%; 
         background: #112240; border: 3px solid #64ffda;
         cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         display: flex; align-items: center; justify-content: center;
         overflow: hidden; transition: transform 0.3s;
+        position: relative; /* Important pour centrer la vidéo */
     }
     #forfy-icon:hover { transform: scale(1.1) rotate(5deg); }
-    #forfy-icon img { width: 100%; height: 100%; object-fit: cover; }
+    
+    /* LA VIDÉO À L'INTÉRIEUR */
+    #forfy-video {
+        width: 100%; height: 100%; 
+        object-fit: cover; /* Remplit tout le cercle sans déformation */
+        border-radius: 50%;
+    }
     
     /* LA FENÊTRE DE CHAT */
     #forfy-window {
@@ -40,7 +48,7 @@ const forfyStyles = `
         background: #0a192f; border: 1px solid #64ffda;
         border-radius: 15px; overflow: hidden;
         flex-direction: column; box-shadow: 0 5px 25px rgba(0,0,0,0.6);
-        margin-bottom: 15px; /* Espace par rapport au bas */
+        margin-bottom: 15px;
     }
     .chat-header {
         background: #112240; padding: 15px; border-bottom: 1px solid #233554;
@@ -71,7 +79,7 @@ const styleSheet = document.createElement("style");
 styleSheet.innerText = forfyStyles;
 document.head.appendChild(styleSheet);
 
-// 2. LA BASE DE CONNAISSANCES
+// 3. LA BASE DE CONNAISSANCES
 const knowledgeBase = [
     { keys: ["bonjour", "salut", "hello", "hi"], response: "Wouf ! Bonjour ! Je suis Forfy. Comment puis-je vous aider à propos de Forfeo ?" },
     { keys: ["c'est quoi", "mission", "forfeo"], response: "Forfeo est une plateforme de forfaits qui reverse 1% de ses bénéfices aux organismes du Québec. On transforme l'achat plaisir en geste solidaire ! 🐾" },
@@ -82,7 +90,7 @@ const knowledgeBase = [
     { keys: ["contact", "aide", "parler", "humain"], response: "Besoin d'un humain ? Écrivez à support@forfeo.com. Moi je ne suis qu'un chien virtuel ! 🐶" }
 ];
 
-// 3. LOGIQUE INTELLIGENTE
+// 4. LOGIQUE INTELLIGENTE
 function getBotResponse(input) {
     input = input.toLowerCase();
     for (let entry of knowledgeBase) {
@@ -95,7 +103,7 @@ function getBotResponse(input) {
     return "Je ne suis pas sûr de comprendre (je suis un petit chien après tout 🐶). Essayez 'vidéo', 'organisme' ou 'vote' !";
 }
 
-// 4. CRÉATION DU WIDGET HTML (AVEC LA BULLE ET L'IMAGE CORRIGÉE)
+// 5. CRÉATION DU WIDGET HTML (Avec balise VIDEO)
 const widgetHTML = `
     <div id="forfy-widget">
         <div id="forfy-window">
@@ -115,23 +123,25 @@ const widgetHTML = `
         <div id="forfy-bubble" onclick="toggleChat()">Wouf ! 👋</div>
 
         <div id="forfy-icon" onclick="toggleChat()">
-            <img src="${forfyImageSource}" alt="Forfy le chien">
+            <video id="forfy-video" autoplay loop muted playsinline>
+                <source src="${forfyVideoSource}" type="video/mp4">
+            </video>
         </div>
     </div>
 `;
 document.body.insertAdjacentHTML('beforeend', widgetHTML);
 
-// 5. FONCTIONS DU CHAT
+// 6. FONCTIONS DU CHAT
 function toggleChat() {
     const win = document.getElementById("forfy-window");
     const bubble = document.getElementById("forfy-bubble");
     
     if (win.style.display === "none" || win.style.display === "") {
         win.style.display = "flex";
-        bubble.style.display = "none"; // On cache la bulle quand on ouvre le chat
+        bubble.style.display = "none";
     } else {
         win.style.display = "none";
-        bubble.style.display = "block"; // On réaffiche la bulle quand on ferme
+        bubble.style.display = "block";
     }
 }
 
@@ -161,10 +171,10 @@ function handleKeyPress(e) {
     if (e.key === "Enter") sendMessage();
 }
 
-// 6. ACCUEIL CONTEXTUEL DANS LA BULLE
+// 7. ACCUEIL CONTEXTUEL
 function setBubbleGreeting() {
     const path = window.location.pathname;
-    let msg = "Wouf ! Besoin d'aide ? 👋"; // Message par défaut
+    let msg = "Wouf ! Besoin d'aide ? 👋"; 
     
     if (path.includes("videos.html")) {
         msg = "Wouf ! Envoyez vos vidéos ici ! 🎥";
@@ -180,18 +190,20 @@ function setBubbleGreeting() {
          msg = "Bienvenue ! 1% pour le Québec ! ⚜️";
     }
     
-    // Afficher le message dans la bulle et la rendre visible
     const bubble = document.getElementById("forfy-bubble");
-    bubble.innerText = msg;
-    bubble.style.display = "block";
-    
-    // Optionnel : faire disparaître la bulle après 10 secondes si on ne clique pas
-    setTimeout(() => {
-         if(document.getElementById("forfy-window").style.display !== "flex") {
-             bubble.style.opacity = "0.8";
-         }
-    }, 10000);
+    if(bubble) {
+        bubble.innerText = msg;
+        bubble.style.display = "block";
+        
+        setTimeout(() => {
+             if(document.getElementById("forfy-window").style.display !== "flex") {
+                 bubble.style.opacity = "0.8";
+             }
+        }, 10000);
+    }
 }
 
-// Lancer l'accueil au chargement
-setBubbleGreeting();
+// Lancer au chargement
+window.onload = function() {
+    setBubbleGreeting();
+};
